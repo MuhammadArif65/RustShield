@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to RustShield will be documented in this file.
+All notable changes to FerrumWard will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -46,12 +46,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `license` — Issue hardware-bound offline licenses
 
 - **Engine Integrations**
-  - Bevy plugin (`rustshield-bevy`)
-  - Godot 4 GDExtension (`rustshield-godot`)
-  - C-compatible FFI bridge (`rustshield-ffi`) for Unity/Unreal/custom engines
+  - Bevy plugin (`ferrumward-bevy`)
+  - Godot 4 GDExtension (`ferrumward-godot`)
+  - C-compatible FFI bridge (`ferrumward-ffi`) for Unity/Unreal/custom engines
 
 - **Red Team Simulation**
-  - `rustshield-attacker` binary with 4 attack modes: `ptrace`, `scan`, `inject`, `freeze`
+  - `ferrumward-attacker` binary with 4 attack modes: `ptrace`, `scan`, `inject`, `freeze`
 
 - **Test Suite**
   - Burst hacking (concurrent protection init)

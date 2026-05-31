@@ -1,0 +1,17 @@
+[package]
+name = "ferrumward-godot"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Godot 4 GDExtension for FerrumWard"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+ferrumward-core = { path = "../ferrumward-core", features = ["full"] }
+godot.workspace = true
+
+
+# 

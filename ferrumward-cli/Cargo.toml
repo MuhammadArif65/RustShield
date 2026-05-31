@@ -1,0 +1,24 @@
+[package]
+name = "ferrumward-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "CLI tool for FerrumWard — key generation, licensing, and integrity verification"
+
+[[bin]]
+name = "ferrumward"
+path = "src/main.rs"
+
+[dependencies]
+ferrumward-core = { path = "../ferrumward-core" }
+clap = { version = "4", features = ["derive"] }
+anyhow = "1"
+ed25519-dalek.workspace = true
+serde_json.workspace = true
+walkdir.workspace = true
+aes-gcm = "0.10"
+rand = "0.8"
+
+
+# 

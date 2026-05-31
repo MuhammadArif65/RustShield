@@ -912,6 +912,104 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f1f227452a390804cdb637b74a86990f2a7d7ba4b7d5693aac9b4dd6defd8d6"
 
 [[package]]
+name = "ferrumward-attacker"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "sysinfo",
+]
+
+[[package]]
+name = "ferrumward-bevy"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "ferrumward-core",
+]
+
+[[package]]
+name = "ferrumward-cli"
+version = "0.1.0"
+dependencies = [
+ "aes-gcm",
+ "anyhow",
+ "clap",
+ "ed25519-dalek",
+ "ferrumward-core",
+ "rand 0.8.6",
+ "serde_json",
+ "walkdir",
+]
+
+[[package]]
+name = "ferrumward-core"
+version = "0.1.0"
+dependencies = [
+ "aes-gcm",
+ "base64",
+ "ed25519-dalek",
+ "ferrumward-macros",
+ "hkdf",
+ "hmac",
+ "libc",
+ "litcrypt",
+ "machine-uid",
+ "rand 0.8.6",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sysinfo",
+ "thiserror 1.0.69",
+ "tss-esapi",
+ "walkdir",
+]
+
+[[package]]
+name = "ferrumward-ffi"
+version = "0.1.0"
+dependencies = [
+ "ferrumward-core",
+]
+
+[[package]]
+name = "ferrumward-godot"
+version = "0.1.0"
+dependencies = [
+ "ferrumward-core",
+ "godot",
+]
+
+[[package]]
+name = "ferrumward-loader"
+version = "0.1.0"
+dependencies = [
+ "aes-gcm",
+ "memfd",
+ "rand 0.8.6",
+ "tempfile",
+]
+
+[[package]]
+name = "ferrumward-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "rand 0.8.6",
+ "syn",
+]
+
+[[package]]
+name = "ferrumward-mock-game"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "ed25519-dalek",
+ "ferrumward-bevy",
+ "ferrumward-core",
+]
+
+[[package]]
 name = "fiat-crypto"
 version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1875,104 +1973,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rustshield-attacker"
-version = "0.1.0"
-dependencies = [
- "libc",
- "sysinfo",
-]
-
-[[package]]
-name = "rustshield-bevy"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "rustshield-core",
-]
-
-[[package]]
-name = "rustshield-cli"
-version = "0.1.0"
-dependencies = [
- "aes-gcm",
- "anyhow",
- "clap",
- "ed25519-dalek",
- "rand 0.8.6",
- "rustshield-core",
- "serde_json",
- "walkdir",
-]
-
-[[package]]
-name = "rustshield-core"
-version = "0.1.0"
-dependencies = [
- "aes-gcm",
- "base64",
- "ed25519-dalek",
- "hkdf",
- "hmac",
- "libc",
- "litcrypt",
- "machine-uid",
- "rand 0.8.6",
- "rustshield-macros",
- "serde",
- "serde_json",
- "sha2",
- "sysinfo",
- "thiserror 1.0.69",
- "tss-esapi",
- "walkdir",
-]
-
-[[package]]
-name = "rustshield-ffi"
-version = "0.1.0"
-dependencies = [
- "rustshield-core",
-]
-
-[[package]]
-name = "rustshield-godot"
-version = "0.1.0"
-dependencies = [
- "godot",
- "rustshield-core",
-]
-
-[[package]]
-name = "rustshield-loader"
-version = "0.1.0"
-dependencies = [
- "aes-gcm",
- "memfd",
- "rand 0.8.6",
- "tempfile",
-]
-
-[[package]]
-name = "rustshield-macros"
-version = "0.1.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "rand 0.8.6",
- "syn",
-]
-
-[[package]]
-name = "rustshield-mock-game"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "ed25519-dalek",
- "rustshield-bevy",
- "rustshield-core",
-]
-
-[[package]]
 name = "rustversion"
 version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2823,4 +2823,3 @@ name = "zmij"
 version = "1.0.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa"
-# refresh

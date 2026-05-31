@@ -1,6 +1,6 @@
-# RustShield Architecture & Distribution Flow
+# FerrumWard Architecture & Distribution Flow
 
-This document provides a deep dive into the inner workings of RustShield, from its underlying architecture to the complete lifecycle of game distribution.
+This document provides a deep dive into the inner workings of FerrumWard, from its underlying architecture to the complete lifecycle of game distribution.
 
 ---
 
@@ -12,9 +12,9 @@ This document provides a deep dive into the inner workings of RustShield, from i
 
 ## 1. Project History & Philosophy
 
-RustShield was born out of the necessity for a **zero-dependency, highly secure offline DRM** (Digital Rights Management) system. Many existing anti-piracy solutions either rely heavily on "always-online" requirements, which frustrate legitimate players, or they operate as invasive kernel-level drivers (Ring 0), which introduce massive security vulnerabilities and compatibility issues (e.g., preventing games from running on Linux/Steam Deck via Proton).
+FerrumWard was born out of the necessity for a **zero-dependency, highly secure offline DRM** (Digital Rights Management) system. Many existing anti-piracy solutions either rely heavily on "always-online" requirements, which frustrate legitimate players, or they operate as invasive kernel-level drivers (Ring 0), which introduce massive security vulnerabilities and compatibility issues (e.g., preventing games from running on Linux/Steam Deck via Proton).
 
-**The RustShield Philosophy:**
+**The FerrumWard Philosophy:**
 *   **Zero Dependency (User-Space Ring 3):** No kernel drivers. No external bloated libraries. Everything operates in user-space using Rust's zero-cost abstractions and standard OS APIs.
 *   **No "Always-Online" Requirement:** Once activated, the game can be played offline forever, bound cryptographically to the user's hardware.
 *   **Fail-Deadly, Silently:** If tampering is detected, the game does not show a helpful error message like "Debugger Detected". It simply crashes or triggers a generalized `TamperDetected` error, giving reverse engineers zero feedback on *what* caught them.
@@ -22,10 +22,10 @@ RustShield was born out of the necessity for a **zero-dependency, highly secure 
 
 ## 2. Core Protection Mechanisms (The "How It Works")
 
-RustShield does not rely on a single point of failure. It uses a multi-layered approach:
+FerrumWard does not rely on a single point of failure. It uses a multi-layered approach:
 
 ### A. The Neural Heuristic Scoring Engine
-Instead of just checking binary flags (e.g., "Is a debugger attached? Yes/No"), RustShield employs a **Neural Heuristic Scoring Engine**. This is a Multi-Layer Perceptron (MLP) style scoring system (5 inputs -> 4 hidden nodes -> 1 output) that evaluates system telemetry in real-time.
+Instead of just checking binary flags (e.g., "Is a debugger attached? Yes/No"), FerrumWard employs a **Neural Heuristic Scoring Engine**. This is a Multi-Layer Perceptron (MLP) style scoring system (5 inputs -> 4 hidden nodes -> 1 output) that evaluates system telemetry in real-time.
 
 **The Sensors (Inputs):**
 1.  **Page Fault Spikes:** Monitors `/proc/self/stat`. A massive, sudden spike in page faults usually indicates a memory scanner (like Cheat Engine) is aggressively reading the game's memory.
@@ -37,7 +37,7 @@ Instead of just checking binary flags (e.g., "Is a debugger attached? Yes/No"), 
 If the final sigmoid output exceeds the `0.85` threshold, the game is terminated.
 
 ### B. Decoy Honeypot (The Trap)
-RustShield allocates highly attractive, completely fake variables in memory:
+FerrumWard allocates highly attractive, completely fake variables in memory:
 ```rust
 player_health: 100
 player_gold: 999
@@ -47,7 +47,7 @@ The actual game engine *never* reads or writes to these variables. However, a ch
 
 ### C. Chaotic Hive-Mind Threading
 Traditional anti-cheats run a single background thread. A reverse engineer can simply find this thread and call `SuspendThread` (Windows) or send `SIGSTOP` (Linux).
-RustShield uses **Chaotic Threading**:
+FerrumWard uses **Chaotic Threading**:
 1. A thread spawns, waits for a random interval (50-300ms).
 2. It performs the security checks.
 3. It spawns the *next* thread.
@@ -69,12 +69,12 @@ This data is hashed into a deterministic string.
 
 ## 3. The Game Distribution Flow (End-to-End)
 
-Here is exactly how a game developer uses RustShield from compiling the game to the player launching it.
+Here is exactly how a game developer uses FerrumWard from compiling the game to the player launching it.
 
 ### Phase 1: The Developer Preparation
-1.  **Generate Developer Keys:** The developer runs `rustshield-cli keygen`. This generates an Ed25519 `private.key` (kept strictly on the developer's secure backend/server) and a `public.key` (embedded into the game binary).
-2.  **Build the Game:** The developer compiles the game (e.g., in Unity, Bevy, or Godot) with the RustShield plugin included. The `public.key` is compiled *into* the binary.
-3.  **Generate File Manifest:** The developer runs `rustshield-cli manifest --target-dir ./game_data`. This creates `manifest.json`, containing the SHA-256 hashes of every game asset (models, textures, scripts).
+1.  **Generate Developer Keys:** The developer runs `ferrumward-cli keygen`. This generates an Ed25519 `private.key` (kept strictly on the developer's secure backend/server) and a `public.key` (embedded into the game binary).
+2.  **Build the Game:** The developer compiles the game (e.g., in Unity, Bevy, or Godot) with the FerrumWard plugin included. The `public.key` is compiled *into* the binary.
+3.  **Generate File Manifest:** The developer runs `ferrumward-cli manifest --target-dir ./game_data`. This creates `manifest.json`, containing the SHA-256 hashes of every game asset (models, textures, scripts).
 4.  **Distribution:** The developer uploads the Game Binary, Game Assets, and `manifest.json` to Steam, Itch.io, or their own website.
 
 ### Phase 2: The Player Purchase & Activation
@@ -86,10 +86,10 @@ Here is exactly how a game developer uses RustShield from compiling the game to 
 
 ### Phase 3: The Runtime Validation (Every time the game launches)
 1.  **Launch:** The player double-clicks the game executable.
-2.  **Environment Check:** RustShield immediately scans for debuggers (TracerPid), VMs, and RWX memory injections.
-3.  **Integrity Check:** RustShield hashes the local game assets and compares them against `manifest.json`. If a modder altered a file, the game crashes.
+2.  **Environment Check:** FerrumWard immediately scans for debuggers (TracerPid), VMs, and RWX memory injections.
+3.  **Integrity Check:** FerrumWard hashes the local game assets and compares them against `manifest.json`. If a modder altered a file, the game crashes.
 4.  **License Validation:**
-    *   RustShield calculates the current machine's HWID.
+    *   FerrumWard calculates the current machine's HWID.
     *   It reads `player_license.sig`.
     *   Using the embedded `public.key`, it verifies that the signature is mathematically valid and was signed by the developer.
     *   It decrypts the license to ensure the embedded HWID matches the *current* machine's HWID. If the player copied the game to a different PC, the HWIDs won't match, and the game closes.

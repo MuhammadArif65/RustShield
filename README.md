@@ -1,8 +1,8 @@
-# RustShield
+# FerrumWard
 
-**RustShield** is a zero-dependency, modular, and extremely secure offline anti-piracy and game protection system written in Rust.
+**FerrumWard** is a zero-dependency, modular, and extremely secure offline anti-piracy and game protection system written in Rust.
 
-It provides out-of-the-box mechanisms to prevent debugging, virtualization, memory tampering, and unauthorized distribution through hardware-bound cryptography. RustShield is designed for offline games and ships with official wrappers for **Bevy**, **Godot**, **Unity**, and **Unreal Engine**.
+It provides out-of-the-box mechanisms to prevent debugging, virtualization, memory tampering, and unauthorized distribution through hardware-bound cryptography. FerrumWard is designed for offline games and ships with official wrappers for **Bevy**, **Godot**, **Unity**, and **Unreal Engine**.
 
 ---
 
@@ -26,7 +26,7 @@ It provides out-of-the-box mechanisms to prevent debugging, virtualization, memo
 
 ## Installation & Requirements
 
-RustShield requires **Rust 1.75+**.
+FerrumWard requires **Rust 1.75+**.
 
 Clone the repository and build the workspace:
 ```bash
@@ -39,20 +39,20 @@ cargo build --release --all --features full
 
 ## Workspace Structure
 
-- `rustshield-core`: The main protection logic (Zero external dependencies outside of `crypto`).
-- `rustshield-cli`: The developer tool for generating keys, manifests, and offline licenses.
-- `rustshield-ffi`: The C-compatible FFI layer for integration with Unity, Unreal Engine, and custom C/C++ games.
-- `rustshield-bevy`: Official plugin for the Bevy Engine.
-- `rustshield-godot`: Official GDExtension for Godot 4.
-- `rustshield-mock-game`: An end-to-end sandbox game showing how to integrate the protection.
+- `ferrumward-core`: The main protection logic (Zero external dependencies outside of `crypto`).
+- `ferrumward-cli`: The developer tool for generating keys, manifests, and offline licenses.
+- `ferrumward-ffi`: The C-compatible FFI layer for integration with Unity, Unreal Engine, and custom C/C++ games.
+- `ferrumward-bevy`: Official plugin for the Bevy Engine.
+- `ferrumward-godot`: Official GDExtension for Godot 4.
+- `ferrumward-mock-game`: An end-to-end sandbox game showing how to integrate the protection.
 
 ## Usage Guide
 
 ### 1. Generate Developer Keys
-Use the `rustshield-cli` to generate your Ed25519 Keypair. This keypair is used to issue licenses to your players.
+Use the `ferrumward-cli` to generate your Ed25519 Keypair. This keypair is used to issue licenses to your players.
 
 ```bash
-cargo run --bin rustshield-cli -- keygen --output-dir ./keys
+cargo run --bin ferrumward-cli -- keygen --output-dir ./keys
 ```
 This generates `private.key` (keep this safe) and `public.key` (ship this with your game).
 
@@ -60,14 +60,14 @@ This generates `private.key` (keep this safe) and `public.key` (ship this with y
 Create a cryptographic hash manifest of your game assets to detect modified files.
 
 ```bash
-cargo run --bin rustshield-cli -- manifest --target-dir ./assets --output manifest.json
+cargo run --bin ferrumward-cli -- manifest --target-dir ./assets --output manifest.json
 ```
 
 ### 3. Generate a Player License
 When a user buys your game, they submit their Hardware ID (HWID). You generate a license bound to their machine.
 
 ```bash
-cargo run --bin rustshield-cli -- license \
+cargo run --bin ferrumward-cli -- license \
     --hwid "PLAYER_HARDWARE_ID_HERE" \
     --private-key ./keys/private.key \
     --game-id "my-awesome-game" \
@@ -77,12 +77,12 @@ cargo run --bin rustshield-cli -- license \
 ## Integration
 
 ### Bevy Engine
-Add `rustshield-bevy` to your Cargo.toml dependencies.
+Add `ferrumward-bevy` to your Cargo.toml dependencies.
 
 ```rust
 use bevy::prelude::*;
-use rustshield_bevy::RustShieldPlugin;
-use rustshield_core::protection::ProtectionConfig;
+use ferrumward_bevy::FerrumWardPlugin;
+use ferrumward_core::protection::ProtectionConfig;
 
 fn main() {
     let config = ProtectionConfig {
@@ -100,19 +100,19 @@ fn main() {
 
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugins(RustShieldPlugin::new(config))
+        .add_plugins(FerrumWardPlugin::new(config))
         .run();
 }
 ```
 
 ### Unity (C#)
-Place the compiled `rustshield_ffi.dll` in your `Assets/Plugins/` folder. Create a script to initialize the C-API.
+Place the compiled `ferrumward_ffi.dll` in your `Assets/Plugins/` folder. Create a script to initialize the C-API.
 
 ```csharp
 using System;
 using System.Runtime.InteropServices;
 
-public class RustShieldIntegration : MonoBehaviour {
+public class FerrumWardIntegration : MonoBehaviour {
     [StructLayout(LayoutKind.Sequential)]
     public struct CProtectionConfig {
         public IntPtr game_id;
@@ -125,20 +125,20 @@ public class RustShieldIntegration : MonoBehaviour {
         public IntPtr on_failure;
     }
 
-    [DllImport("rustshield_ffi", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int rustshield_init(ref CProtectionConfig config);
+    [DllImport("ferrumward_ffi", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int ferrumward_init(ref CProtectionConfig config);
 
     void Start() {
-        // Initialize config and pass to rustshield_init...
+        // Initialize config and pass to ferrumward_init...
     }
 }
 ```
 
 ### Unreal Engine (C++)
-Include `rustshield.h` and link the compiled `rustshield_ffi` dynamic library in your `Build.cs`.
+Include `ferrumward.h` and link the compiled `ferrumward_ffi` dynamic library in your `Build.cs`.
 
 ```cpp
-#include "rustshield.h"
+#include "ferrumward.h"
 
 void UMyGameInstance::Init() {
     Super::Init();
@@ -149,7 +149,7 @@ void UMyGameInstance::Init() {
     Config.anti_vm = true;
     // ... initialize other fields
     
-    if (rustshield_init(&Config) != 1) {
+    if (ferrumward_init(&Config) != 1) {
         FPlatformMisc::RequestExit(true);
     }
 }
@@ -157,10 +157,10 @@ void UMyGameInstance::Init() {
 
 ## Best Practices for Production
 
-If you intend to use RustShield for a real commercial game release, you **must** adhere to the following best practices to guarantee maximum security and compliance:
+If you intend to use FerrumWard for a real commercial game release, you **must** adhere to the following best practices to guarantee maximum security and compliance:
 
 1. **Strict Key Management:** Never commit your `private.key` to any version control repository (GitHub/GitLab). Keep it completely isolated on a secure backend server that issues licenses.
-2. **Release Profile Optimization:** Ensure that your game and the `rustshield-loader` are compiled with the strongest release profile to strip symbols and prevent de-compilation:
+2. **Release Profile Optimization:** Ensure that your game and the `ferrumward-loader` are compiled with the strongest release profile to strip symbols and prevent de-compilation:
    ```toml
    # Cargo.toml
    [profile.release]
@@ -170,11 +170,11 @@ If you intend to use RustShield for a real commercial game release, you **must**
    strip = "debuginfo"
    panic = "abort"
    ```
-3. **Hardware Change Policy:** Because RustShield binds to MAC Addresses, CPUs, and Motherboards, legitimate players who upgrade their PC hardware will lose access to the game. It is highly recommended to build a web dashboard where players can reset their HWID binding (e.g., maximum 2 times per month) to avoid negative reviews.
-4. **Legal & Privacy Policy (EULA):** RustShield collects hardware fingerprints locally. Ensure your game's EULA clearly states: *"This game collects hardware fingerprint data locally for Digital Rights Management (DRM) purposes. This data is not sold to third parties."* This is crucial to comply with GDPR and Steam's privacy guidelines.
+3. **Hardware Change Policy:** Because FerrumWard binds to MAC Addresses, CPUs, and Motherboards, legitimate players who upgrade their PC hardware will lose access to the game. It is highly recommended to build a web dashboard where players can reset their HWID binding (e.g., maximum 2 times per month) to avoid negative reviews.
+4. **Legal & Privacy Policy (EULA):** FerrumWard collects hardware fingerprints locally. Ensure your game's EULA clearly states: *"This game collects hardware fingerprint data locally for Digital Rights Management (DRM) purposes. This data is not sold to third parties."* This is crucial to comply with GDPR and Steam's privacy guidelines.
 
 ## Security Notice
-RustShield relies on Obscurity + Verification. While it dramatically raises the barrier for reverse engineering and piracy, no offline DRM is 100% unbreakable. It is highly recommended to pair RustShield with proper code obfuscation tools at the binary level.
+FerrumWard relies on Obscurity + Verification. While it dramatically raises the barrier for reverse engineering and piracy, no offline DRM is 100% unbreakable. It is highly recommended to pair FerrumWard with proper code obfuscation tools at the binary level.
 
 
 <!-- -->

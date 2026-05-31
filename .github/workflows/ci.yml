@@ -8,7 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  LITCRYPT_ENCRYPT_KEY: rustshield-static-key-2025
+  LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
 
 jobs:
   check:

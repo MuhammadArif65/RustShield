@@ -1,24 +1,24 @@
 [workspace]
 resolver = "2"
 members = [
-    "rustshield-core",
-    "rustshield-cli",
-    "rustshield-ffi",
-    "rustshield-bevy",
-    "rustshield-godot",
-    "rustshield-mock-game",
-    "rustshield-macros",
-    "rustshield-loader",
+    "ferrumward-core",
+    "ferrumward-cli",
+    "ferrumward-ffi",
+    "ferrumward-bevy",
+    "ferrumward-godot",
+    "ferrumward-mock-game",
+    "ferrumward-macros",
+    "ferrumward-loader",
     "dummy_game",
-    "rustshield-attacker",
+    "ferrumward-attacker",
 ]
 
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/rustshield/rustshield"
-authors = ["RustShield Contributors"]
+repository = "https://github.com/ferrumward/ferrumward"
+authors = ["FerrumWard Contributors"]
 rust-version = "1.75"
 description = "Anti-piracy & game protection system"
 keywords = ["anti-piracy", "game-protection", "drm", "integrity", "security"]

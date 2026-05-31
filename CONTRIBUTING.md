@@ -1,6 +1,6 @@
-# Contributing to RustShield
+# Contributing to FerrumWard
 
-Thank you for your interest in contributing to RustShield! This document provides guidelines for contributing.
+Thank you for your interest in contributing to FerrumWard! This document provides guidelines for contributing.
 
 ## Code of Conduct
 
@@ -19,9 +19,9 @@ Be respectful. We are building security software — precision and professionali
 
 ## Development Rules (Constitution)
 
-RustShield follows a strict constitution defined in [AGENTS.md](AGENTS.md). All contributions **must** adhere to:
+FerrumWard follows a strict constitution defined in [AGENTS.md](AGENTS.md). All contributions **must** adhere to:
 
-1. **No `unwrap()`, `expect()`, or `panic!()` in library code** — Use `Result<T>` and return `RustShieldError`.
+1. **No `unwrap()`, `expect()`, or `panic!()` in library code** — Use `Result<T>` and return `FerrumWardError`.
 2. **No `println!()` in library code** — All logging should be through the error/callback system.
 3. **All `unsafe` blocks must have `// SAFETY:` comments** explaining why the operation is safe.
 4. **All errors exposed externally must be `TamperDetected`** — Never reveal which specific check failed.
@@ -38,7 +38,7 @@ RustShield follows a strict constitution defined in [AGENTS.md](AGENTS.md). All 
 
 ## Testing
 
-- All new protection modules must include tests in `rustshield-core/tests/`
+- All new protection modules must include tests in `ferrumward-core/tests/`
 - Security-critical code should include adversarial tests (see `brutal_tests.rs`)
 - Run the full test suite before submitting:
   ```bash
@@ -48,13 +48,13 @@ RustShield follows a strict constitution defined in [AGENTS.md](AGENTS.md). All 
 ## Architecture
 
 ```
-rustshield-core/     → Core protection library (no framework dependencies)
-rustshield-cli/      → Developer CLI tool (keygen, manifest, license)
-rustshield-ffi/      → C-compatible FFI bridge (Unity, Unreal, custom engines)
-rustshield-bevy/     → Bevy engine plugin
-rustshield-godot/    → Godot 4 GDExtension
-rustshield-macros/   → Procedural macros
-rustshield-attacker/ → Red team simulation tool
+ferrumward-core/     → Core protection library (no framework dependencies)
+ferrumward-cli/      → Developer CLI tool (keygen, manifest, license)
+ferrumward-ffi/      → C-compatible FFI bridge (Unity, Unreal, custom engines)
+ferrumward-bevy/     → Bevy engine plugin
+ferrumward-godot/    → Godot 4 GDExtension
+ferrumward-macros/   → Procedural macros
+ferrumward-attacker/ → Red team simulation tool
 ```
 
 ## Questions?

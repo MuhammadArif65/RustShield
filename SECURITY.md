@@ -9,11 +9,11 @@
 ## Reporting a Vulnerability
 
 **Why not open a public GitHub Issue?**
-Although this is an Open Source project, RustShield is fundamentally a security software. If someone discovers a security flaw (Zero-Day Vulnerability) and reports it publicly in the Issues tab, malicious actors and game pirates can immediately exploit it to compromise games before we have a chance to release a patch.
+Although this is an Open Source project, FerrumWard is fundamentally a security software. If someone discovers a security flaw (Zero-Day Vulnerability) and reports it publicly in the Issues tab, malicious actors and game pirates can immediately exploit it to compromise games before we have a chance to release a patch.
 
 Therefore, we follow the global security industry standard known as **Coordinated Vulnerability Disclosure (CVD)**. We ask you to report security vulnerabilities privately so we can patch them *before* they are made public.
 
-If you discover a security vulnerability in RustShield, **please do NOT open a public GitHub issue**.
+If you discover a security vulnerability in FerrumWard, **please do NOT open a public GitHub issue**.
 Instead, please report it responsibly via private email:
 
 - **Email:** muhamadarif7566@gmail.com

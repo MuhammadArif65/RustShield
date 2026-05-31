@@ -1,0 +1,512 @@
+﻿2026-05-31T01:56:41.9530456Z Current runner version: '2.334.0'
+2026-05-31T01:56:41.9580330Z ##[group]Runner Image Provisioner
+2026-05-31T01:56:41.9582010Z Hosted Compute Agent
+2026-05-31T01:56:41.9583045Z Version: 20260520.533
+2026-05-31T01:56:41.9587098Z Commit: 189110e25284a9812c124fd27b339e2fb4f2f9db
+2026-05-31T01:56:41.9588430Z Build Date: 2026-05-20T17:44:04Z
+2026-05-31T01:56:41.9589624Z Worker ID: {d8e8d0df-b615-42a0-8fd3-305b31fd06ca}
+2026-05-31T01:56:41.9591012Z Azure Region: eastus
+2026-05-31T01:56:41.9592028Z ##[endgroup]
+2026-05-31T01:56:41.9594677Z ##[group]Operating System
+2026-05-31T01:56:41.9595831Z Microsoft Windows Server 2025
+2026-05-31T01:56:41.9596946Z 10.0.26100
+2026-05-31T01:56:41.9597899Z Datacenter
+2026-05-31T01:56:41.9598844Z ##[endgroup]
+2026-05-31T01:56:41.9599810Z ##[group]Runner Image
+2026-05-31T01:56:41.9600936Z Image: windows-2025
+2026-05-31T01:56:41.9601899Z Version: 20260525.149.1
+2026-05-31T01:56:41.9606414Z Included Software: https://github.com/actions/runner-images/blob/win25/20260525.149/images/windows/Windows2025-Readme.md
+2026-05-31T01:56:41.9609305Z Image Release: https://github.com/actions/runner-images/releases/tag/win25%2F20260525.149
+2026-05-31T01:56:41.9611096Z ##[endgroup]
+2026-05-31T01:56:41.9613247Z ##[group]GITHUB_TOKEN Permissions
+2026-05-31T01:56:41.9616953Z Contents: read
+2026-05-31T01:56:41.9617960Z Metadata: read
+2026-05-31T01:56:41.9619303Z Packages: read
+2026-05-31T01:56:41.9620275Z ##[endgroup]
+2026-05-31T01:56:41.9626730Z Secret source: Actions
+2026-05-31T01:56:41.9628228Z Prepare workflow directory
+2026-05-31T01:56:42.4591310Z Prepare all required actions
+2026-05-31T01:56:42.4659853Z Getting action download info
+2026-05-31T01:56:42.8193347Z Download action repository 'actions/checkout@v6' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-05-31T01:56:42.9660079Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:29eef336d9b2848a0b548edc03f92a220660cdb8)
+2026-05-31T01:56:43.0563765Z Download action repository 'Swatinem/rust-cache@v2' (SHA:e18b497796c12c097a38f9edb9d0641fb99eee32)
+2026-05-31T01:56:43.4969445Z Complete job name: Check (windows-latest)
+2026-05-31T01:56:43.6540729Z ##[group]Run actions/checkout@v6
+2026-05-31T01:56:43.6542690Z with:
+2026-05-31T01:56:43.6543432Z   repository: MuhammadArif65/FerrumWard
+2026-05-31T01:56:43.6553669Z   token: ***
+2026-05-31T01:56:43.6554413Z   ssh-strict: true
+2026-05-31T01:56:43.6555139Z   ssh-user: git
+2026-05-31T01:56:43.6555864Z   persist-credentials: true
+2026-05-31T01:56:43.6556663Z   clean: true
+2026-05-31T01:56:43.6557401Z   sparse-checkout-cone-mode: true
+2026-05-31T01:56:43.6558234Z   fetch-depth: 1
+2026-05-31T01:56:43.6558919Z   fetch-tags: false
+2026-05-31T01:56:43.6559556Z   show-progress: true
+2026-05-31T01:56:43.6560638Z   lfs: false
+2026-05-31T01:56:43.6561283Z   submodules: false
+2026-05-31T01:56:43.6561981Z   set-safe-directory: true
+2026-05-31T01:56:43.6563315Z env:
+2026-05-31T01:56:43.6563972Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:43.6564838Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:43.6565907Z ##[endgroup]
+2026-05-31T01:56:44.2296029Z Syncing repository: MuhammadArif65/FerrumWard
+2026-05-31T01:56:44.2299532Z ##[group]Getting Git version info
+2026-05-31T01:56:44.2300377Z Working directory is 'D:\a\FerrumWard\FerrumWard'
+2026-05-31T01:56:44.2617029Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-05-31T01:56:45.5617277Z git version 2.54.0.windows.1
+2026-05-31T01:56:45.5694905Z ##[endgroup]
+2026-05-31T01:56:45.5715872Z Temporarily overriding HOME='D:\a\_temp\dc7cfb1f-8c70-41bb-a202-bb5bc2d472ba' before making global git config changes
+2026-05-31T01:56:45.5717930Z Adding repository directory to the temporary git global config as a safe directory
+2026-05-31T01:56:45.5731347Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\FerrumWard\FerrumWard
+2026-05-31T01:56:45.6430727Z Deleting the contents of 'D:\a\FerrumWard\FerrumWard'
+2026-05-31T01:56:45.6436859Z ##[group]Initializing the repository
+2026-05-31T01:56:45.6449343Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\FerrumWard\FerrumWard
+2026-05-31T01:56:45.7372993Z Initialized empty Git repository in D:/a/FerrumWard/FerrumWard/.git/
+2026-05-31T01:56:45.7444446Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/MuhammadArif65/FerrumWard
+2026-05-31T01:56:45.8046781Z ##[endgroup]
+2026-05-31T01:56:45.8048363Z ##[group]Disabling automatic garbage collection
+2026-05-31T01:56:45.8060251Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-05-31T01:56:45.8517714Z ##[endgroup]
+2026-05-31T01:56:45.8519122Z ##[group]Setting up auth
+2026-05-31T01:56:45.8520189Z Removing SSH command configuration
+2026-05-31T01:56:45.8532843Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-05-31T01:56:45.9001039Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-05-31T01:56:47.6948853Z Removing HTTP extra header
+2026-05-31T01:56:47.6963019Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-05-31T01:56:47.7317956Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-05-31T01:56:48.3873964Z Removing includeIf entries pointing to credentials config files
+2026-05-31T01:56:48.3887245Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-05-31T01:56:48.4298139Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-05-31T01:56:49.0931153Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-05-31T01:56:49.1311276Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/FerrumWard/FerrumWard/.git.path D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:56:49.1684011Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/FerrumWard/FerrumWard/.git/worktrees/*.path D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:56:49.2106902Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:56:49.2486138Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:56:49.2870520Z ##[endgroup]
+2026-05-31T01:56:49.2871782Z ##[group]Fetching the repository
+2026-05-31T01:56:49.2889389Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5e06f81dbf97ab558cbc63f7e4175e3b9ee0e264:refs/remotes/origin/main
+2026-05-31T01:56:50.3098431Z From https://github.com/MuhammadArif65/FerrumWard
+2026-05-31T01:56:50.3099732Z  * [new ref]         5e06f81dbf97ab558cbc63f7e4175e3b9ee0e264 -> origin/main
+2026-05-31T01:56:50.3544175Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+2026-05-31T01:56:50.3930119Z   origin/main
+2026-05-31T01:56:50.4064000Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+2026-05-31T01:56:50.4388385Z 5e06f81dbf97ab558cbc63f7e4175e3b9ee0e264
+2026-05-31T01:56:50.4455131Z ##[endgroup]
+2026-05-31T01:56:50.4456157Z ##[group]Determining the checkout info
+2026-05-31T01:56:50.4479771Z ##[endgroup]
+2026-05-31T01:56:50.4503372Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-05-31T01:56:50.4958962Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-05-31T01:56:50.5308857Z ##[group]Checking out the ref
+2026-05-31T01:56:50.5320057Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-05-31T01:56:50.6504484Z Switched to a new branch 'main'
+2026-05-31T01:56:50.6567502Z branch 'main' set up to track 'origin/main'.
+2026-05-31T01:56:50.6631937Z ##[endgroup]
+2026-05-31T01:56:50.7134181Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-05-31T01:56:50.7452499Z 5e06f81dbf97ab558cbc63f7e4175e3b9ee0e264
+2026-05-31T01:56:50.8080818Z ##[group]Run dtolnay/rust-toolchain@stable
+2026-05-31T01:56:50.8081198Z with:
+2026-05-31T01:56:50.8081404Z   components: rustfmt, clippy
+2026-05-31T01:56:50.8081674Z   toolchain: stable
+2026-05-31T01:56:50.8081906Z env:
+2026-05-31T01:56:50.8082086Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:50.8082362Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:50.8082674Z ##[endgroup]
+2026-05-31T01:56:50.8426719Z ##[group]Run : parse toolchain version
+2026-05-31T01:56:50.8427205Z [36;1m: parse toolchain version[0m
+2026-05-31T01:56:50.8427540Z [36;1mif [[ -z $toolchain ]]; then[0m
+2026-05-31T01:56:50.8428193Z [36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070[0m
+2026-05-31T01:56:50.8428935Z [36;1m  echo "'toolchain' is a required input" >&2[0m
+2026-05-31T01:56:50.8429294Z [36;1m  exit 1[0m
+2026-05-31T01:56:50.8429748Z [36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then[0m
+2026-05-31T01:56:50.8430262Z [36;1m  if [[ Windows == macOS ]]; then[0m
+2026-05-31T01:56:50.8430921Z [36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:50.8431565Z [36;1m  else[0m
+2026-05-31T01:56:50.8432045Z [36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:50.8432605Z [36;1m  fi[0m
+2026-05-31T01:56:50.8432949Z [36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then[0m
+2026-05-31T01:56:50.8433589Z [36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:50.8434144Z [36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then[0m
+2026-05-31T01:56:50.8435259Z [36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:50.8435883Z [36;1melse[0m
+2026-05-31T01:56:50.8436160Z [36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:50.8436508Z [36;1mfi[0m
+2026-05-31T01:56:50.8455766Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:56:50.8456379Z env:
+2026-05-31T01:56:50.8456622Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:50.8456955Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:50.8457299Z   toolchain: stable
+2026-05-31T01:56:50.8457513Z ##[endgroup]
+2026-05-31T01:56:51.0527294Z ##[group]Run : construct rustup command line
+2026-05-31T01:56:51.0527753Z [36;1m: construct rustup command line[0m
+2026-05-31T01:56:51.0528340Z [36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:51.0529185Z [36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:51.0529857Z [36;1mecho "downgrade=" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:56:51.0544742Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:56:51.0545233Z env:
+2026-05-31T01:56:51.0545441Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:51.0545972Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:51.0546319Z   targets: 
+2026-05-31T01:56:51.0546528Z   components: rustfmt, clippy
+2026-05-31T01:56:51.0546798Z ##[endgroup]
+2026-05-31T01:56:51.1442511Z ##[group]Run : set $CARGO_HOME
+2026-05-31T01:56:51.1442872Z [36;1m: set $CARGO_HOME[0m
+2026-05-31T01:56:51.1443315Z [36;1mecho CARGO_HOME=${CARGO_HOME:-"$USERPROFILE\.cargo"} >> $GITHUB_ENV[0m
+2026-05-31T01:56:51.1458826Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:56:51.1459318Z env:
+2026-05-31T01:56:51.1459531Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:51.1459855Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:51.1460214Z ##[endgroup]
+2026-05-31T01:56:51.2123123Z ##[group]Run : install rustup if needed on windows
+2026-05-31T01:56:51.2123702Z [36;1m: install rustup if needed on windows[0m
+2026-05-31T01:56:51.2124124Z [36;1mif ! command -v rustup &>/dev/null; then[0m
+2026-05-31T01:56:51.2125185Z [36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://win.rustup.rs/x86_64 --output 'D:\a\_temp\rustup-init.exe'[0m
+2026-05-31T01:56:51.2126360Z [36;1m  'D:\a\_temp\rustup-init.exe' --default-toolchain none --no-modify-path -y[0m
+2026-05-31T01:56:51.2126928Z [36;1m  echo "$CARGO_HOME\bin" >> $GITHUB_PATH[0m
+2026-05-31T01:56:51.2127273Z [36;1mfi[0m
+2026-05-31T01:56:51.2142463Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:56:51.2142947Z env:
+2026-05-31T01:56:51.2143162Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:51.2143488Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:51.2143872Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:56:51.2144164Z ##[endgroup]
+2026-05-31T01:56:51.2912501Z ##[group]Run rustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update
+2026-05-31T01:56:51.2913597Z [36;1mrustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update[0m
+2026-05-31T01:56:51.2928905Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:56:51.2929414Z env:
+2026-05-31T01:56:51.2929645Z   CARGO_TERM_COLOR: always
+2026-05-31T01:56:51.2929989Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:56:51.2930383Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:56:51.2930717Z   RUSTUP_PERMIT_COPY_RENAME: 1
+2026-05-31T01:56:51.2931002Z ##[endgroup]
+2026-05-31T01:56:54.3232490Z info: syncing channel updates for stable-x86_64-pc-windows-msvc
+2026-05-31T01:56:54.8771263Z info: latest update on 2026-05-28 for version 1.96.0 (ac68faa20 2026-05-25)
+2026-05-31T01:56:54.9189080Z info: removing previous version of component clippy
+2026-05-31T01:56:54.9450073Z info: removing previous version of component rustfmt
+2026-05-31T01:56:54.9716080Z info: removing previous version of component rust-std for target x86_64-pc-windows-gnu
+2026-05-31T01:56:55.1676965Z info: removing previous version of component rust-std for target i686-pc-windows-msvc
+2026-05-31T01:56:55.2733052Z info: removing previous version of component cargo
+2026-05-31T01:56:55.4230262Z info: removing previous version of component rust-std
+2026-05-31T01:56:55.5571829Z info: removing previous version of component rustc
+2026-05-31T01:56:55.7033464Z info: downloading 7 components
+2026-05-31T01:57:10.4206867Z 
+2026-05-31T01:57:10.4641471Z   stable-x86_64-pc-windows-msvc updated - rustc 1.96.0 (ac68faa20 2026-05-25) (from rustc 1.95.0 (59807616e 2026-04-14))
+2026-05-31T01:57:10.4642993Z 
+2026-05-31T01:57:10.5068501Z ##[group]Run rustup default stable
+2026-05-31T01:57:10.5069089Z [36;1mrustup default stable[0m
+2026-05-31T01:57:10.5088990Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:10.5089442Z env:
+2026-05-31T01:57:10.5089638Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:10.5090169Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:10.5090688Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:10.5091185Z ##[endgroup]
+2026-05-31T01:57:10.6300938Z info: using existing install for stable-x86_64-pc-windows-msvc
+2026-05-31T01:57:10.6303086Z info: default toolchain set to stable-x86_64-pc-windows-msvc
+2026-05-31T01:57:10.6304113Z 
+2026-05-31T01:57:10.6714806Z   stable-x86_64-pc-windows-msvc unchanged - rustc 1.96.0 (ac68faa20 2026-05-25)
+2026-05-31T01:57:10.6715549Z 
+2026-05-31T01:57:10.6908301Z ##[group]Run : create cachekey
+2026-05-31T01:57:10.6908663Z [36;1m: create cachekey[0m
+2026-05-31T01:57:10.6910119Z [36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')[0m
+2026-05-31T01:57:10.6911041Z [36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')[0m
+2026-05-31T01:57:10.6911704Z [36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT[0m
+2026-05-31T01:57:10.6925977Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:10.6926504Z env:
+2026-05-31T01:57:10.6926732Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:10.6927075Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:10.6927478Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:10.6927790Z ##[endgroup]
+2026-05-31T01:57:12.0362266Z ##[group]Run : disable incremental compilation
+2026-05-31T01:57:12.0362683Z [36;1m: disable incremental compilation[0m
+2026-05-31T01:57:12.0363057Z [36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then[0m
+2026-05-31T01:57:12.0364021Z [36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV[0m
+2026-05-31T01:57:12.0364689Z [36;1mfi[0m
+2026-05-31T01:57:12.0384838Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:12.0385307Z env:
+2026-05-31T01:57:12.0385520Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:12.0385831Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:12.0386215Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:12.0386520Z ##[endgroup]
+2026-05-31T01:57:12.1166894Z ##[group]Run : enable colors in Cargo output
+2026-05-31T01:57:12.1167485Z [36;1m: enable colors in Cargo output[0m
+2026-05-31T01:57:12.1168029Z [36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then[0m
+2026-05-31T01:57:12.1168661Z [36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV[0m
+2026-05-31T01:57:12.1169193Z [36;1mfi[0m
+2026-05-31T01:57:12.1191067Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:12.1191726Z env:
+2026-05-31T01:57:12.1192034Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:12.1192514Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:12.1193089Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:12.1193570Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:12.1193933Z ##[endgroup]
+2026-05-31T01:57:12.2039235Z ##[group]Run : enable Cargo sparse registry
+2026-05-31T01:57:12.2039633Z [36;1m: enable Cargo sparse registry[0m
+2026-05-31T01:57:12.2040036Z [36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70[0m
+2026-05-31T01:57:12.2040911Z [36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "D:\a\_temp"/.implicit_cargo_registries_crates_io_protocol ]; then[0m
+2026-05-31T01:57:12.2042325Z [36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then[0m
+2026-05-31T01:57:12.2043519Z [36;1m    touch "D:\a\_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-05-31T01:57:12.2044423Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV[0m
+2026-05-31T01:57:12.2045013Z [36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then[0m
+2026-05-31T01:57:12.2045594Z [36;1m    touch "D:\a\_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-05-31T01:57:12.2046125Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV[0m
+2026-05-31T01:57:12.2048371Z [36;1m  fi[0m
+2026-05-31T01:57:12.2048756Z [36;1mfi[0m
+2026-05-31T01:57:12.2066808Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:12.2067406Z env:
+2026-05-31T01:57:12.2067781Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:12.2068388Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:12.2069111Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:12.2069709Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:12.2070098Z ##[endgroup]
+2026-05-31T01:57:12.5092321Z ##[group]Run : work around spurious network errors in curl 8.0
+2026-05-31T01:57:12.5093130Z [36;1m: work around spurious network errors in curl 8.0[0m
+2026-05-31T01:57:12.5094491Z [36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation[0m
+2026-05-31T01:57:12.5095611Z [36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then[0m
+2026-05-31T01:57:12.5096569Z [36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV[0m
+2026-05-31T01:57:12.5097147Z [36;1mfi[0m
+2026-05-31T01:57:12.5121718Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:12.5122469Z env:
+2026-05-31T01:57:12.5122785Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:12.5123268Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:12.5123838Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:12.5124325Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:12.5124693Z ##[endgroup]
+2026-05-31T01:57:12.6909370Z ##[group]Run rustc +stable --version --verbose
+2026-05-31T01:57:12.6910003Z [36;1mrustc +stable --version --verbose[0m
+2026-05-31T01:57:12.6935120Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-05-31T01:57:12.6935881Z env:
+2026-05-31T01:57:12.6936196Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:12.6936684Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:12.6937265Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:12.6937730Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:12.6938072Z ##[endgroup]
+2026-05-31T01:57:12.8234650Z rustc 1.96.0 (ac68faa20 2026-05-25)
+2026-05-31T01:57:12.8235679Z binary: rustc
+2026-05-31T01:57:12.8236673Z commit-hash: ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96
+2026-05-31T01:57:12.8240580Z commit-date: 2026-05-25
+2026-05-31T01:57:12.8264527Z host: x86_64-pc-windows-msvc
+2026-05-31T01:57:12.8268572Z release: 1.96.0
+2026-05-31T01:57:12.8269238Z LLVM version: 22.1.2
+2026-05-31T01:57:12.8763414Z ##[group]Run Swatinem/rust-cache@v2
+2026-05-31T01:57:12.8763762Z with:
+2026-05-31T01:57:12.8764092Z   prefix-key: v0-rust
+2026-05-31T01:57:12.8764503Z   add-job-id-key: true
+2026-05-31T01:57:12.8764932Z   add-rust-environment-hash-key: true
+2026-05-31T01:57:12.8765433Z   cache-targets: true
+2026-05-31T01:57:12.8765831Z   cache-all-crates: false
+2026-05-31T01:57:12.8766260Z   cache-workspace-crates: false
+2026-05-31T01:57:12.8766687Z   save-if: true
+2026-05-31T01:57:12.8767087Z   cache-provider: github
+2026-05-31T01:57:12.8767355Z   cache-bin: true
+2026-05-31T01:57:12.8767568Z   lookup-only: false
+2026-05-31T01:57:12.8767771Z   cmd-format: {0}
+2026-05-31T01:57:12.8767960Z env:
+2026-05-31T01:57:12.8768141Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:12.8768412Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:12.8768752Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:12.8769024Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:12.8769311Z ##[endgroup]
+2026-05-31T01:57:13.3636142Z (node:5084) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-05-31T01:57:13.3671615Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-05-31T01:57:14.7980345Z ##[group]Cache Configuration
+2026-05-31T01:57:14.8000536Z Cache Provider:
+2026-05-31T01:57:14.8007081Z     github
+2026-05-31T01:57:14.8007684Z Workspaces:
+2026-05-31T01:57:14.8008795Z     D:\a\FerrumWard\FerrumWard
+2026-05-31T01:57:14.8009491Z Cache Paths:
+2026-05-31T01:57:14.8010070Z     C:\Users\runneradmin\.cargo\bin
+2026-05-31T01:57:14.8010732Z     C:\Users\runneradmin\.cargo\.crates.toml
+2026-05-31T01:57:14.8011412Z     C:\Users\runneradmin\.cargo\.crates2.json
+2026-05-31T01:57:14.8012270Z     C:\Users\runneradmin\.cargo\registry
+2026-05-31T01:57:14.8013235Z     C:\Users\runneradmin\.cargo\git
+2026-05-31T01:57:14.8014090Z     D:\a\FerrumWard\FerrumWard\target
+2026-05-31T01:57:14.8014910Z Restore Key:
+2026-05-31T01:57:14.8015662Z     v0-rust-check-Windows_NT-x64-5dcabeed
+2026-05-31T01:57:14.8016467Z Cache Key:
+2026-05-31T01:57:14.8017227Z     v0-rust-check-Windows_NT-x64-5dcabeed-51c9e2e6
+2026-05-31T01:57:14.8018130Z .. Prefix:
+2026-05-31T01:57:14.8018813Z   - v0-rust-check-Windows_NT-x64
+2026-05-31T01:57:14.8019554Z .. Environment considered:
+2026-05-31T01:57:14.8096171Z   - Rust Versions:
+2026-05-31T01:57:14.8116705Z     - 1.96.0 x86_64-pc-windows-msvc ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96
+2026-05-31T01:57:14.8143254Z     - 1.96.0 x86_64-pc-windows-msvc ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96
+2026-05-31T01:57:14.8162055Z   - CARGO_HOME
+2026-05-31T01:57:14.8198642Z   - CARGO_INCREMENTAL
+2026-05-31T01:57:14.8199350Z   - CARGO_TERM_COLOR
+2026-05-31T01:57:14.8199890Z .. Lockfiles considered:
+2026-05-31T01:57:14.8200452Z   - D:\a\FerrumWard\FerrumWard\Cargo.lock
+2026-05-31T01:57:14.8202078Z   - D:\a\FerrumWard\FerrumWard\dummy_game\Cargo.toml
+2026-05-31T01:57:14.8203555Z   - D:\a\FerrumWard\FerrumWard\ferrumward-attacker\Cargo.toml
+2026-05-31T01:57:14.8205029Z   - D:\a\FerrumWard\FerrumWard\ferrumward-bevy\Cargo.toml
+2026-05-31T01:57:14.8206635Z   - D:\a\FerrumWard\FerrumWard\ferrumward-cli\Cargo.toml
+2026-05-31T01:57:14.8208158Z   - D:\a\FerrumWard\FerrumWard\ferrumward-core\Cargo.toml
+2026-05-31T01:57:14.8209916Z   - D:\a\FerrumWard\FerrumWard\ferrumward-ffi\Cargo.toml
+2026-05-31T01:57:14.8211540Z   - D:\a\FerrumWard\FerrumWard\ferrumward-godot\Cargo.toml
+2026-05-31T01:57:14.8213265Z   - D:\a\FerrumWard\FerrumWard\ferrumward-loader\Cargo.toml
+2026-05-31T01:57:14.8215390Z   - D:\a\FerrumWard\FerrumWard\ferrumward-macros\Cargo.toml
+2026-05-31T01:57:14.8216903Z   - D:\a\FerrumWard\FerrumWard\ferrumward-mock-game\Cargo.toml
+2026-05-31T01:57:14.8220602Z ##[endgroup]
+2026-05-31T01:57:14.8232530Z 
+2026-05-31T01:57:14.8232906Z ... Restoring cache ...
+2026-05-31T01:57:15.0261421Z Cache hit for: v0-rust-check-Windows_NT-x64-5dcabeed-51c9e2e6
+2026-05-31T01:57:16.3504793Z Received 134217728 of 499597700 (26.9%), 100.5 MBs/sec
+2026-05-31T01:57:17.4473694Z Received 268435456 of 499597700 (53.7%), 108.3 MBs/sec
+2026-05-31T01:57:18.4890688Z Received 402653184 of 499597700 (80.6%), 112.0 MBs/sec
+2026-05-31T01:57:19.1640431Z Received 499597700 of 499597700 (100.0%), 116.1 MBs/sec
+2026-05-31T01:57:19.1645631Z Cache Size: ~476 MB (499597700 B)
+2026-05-31T01:57:19.1864082Z [command]"C:\Program Files\Git\usr\bin\tar.exe" -xf D:/a/_temp/2668a71f-3ec1-486b-924f-67721072f91a/cache.tzst -P -C D:/a/FerrumWard/FerrumWard --force-local --use-compress-program "zstd -d"
+2026-05-31T01:57:34.9003606Z Cache restored successfully
+2026-05-31T01:57:34.9345953Z Restored from cache key "v0-rust-check-Windows_NT-x64-5dcabeed-51c9e2e6" full match: true.
+2026-05-31T01:57:34.9717703Z ##[group]Run cargo fmt --all -- --check
+2026-05-31T01:57:34.9718190Z [36;1mcargo fmt --all -- --check[0m
+2026-05-31T01:57:35.0490343Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-05-31T01:57:35.0491147Z env:
+2026-05-31T01:57:35.0491563Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:35.0492100Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:35.0492734Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:35.0493254Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:35.0493647Z   CACHE_ON_FAILURE: false
+2026-05-31T01:57:35.0494048Z ##[endgroup]
+2026-05-31T01:57:42.5237092Z ##[group]Run cargo clippy --all-targets --features string-obfuscation -- -D warnings
+2026-05-31T01:57:42.5238610Z [36;1mcargo clippy --all-targets --features string-obfuscation -- -D warnings[0m
+2026-05-31T01:57:42.5347054Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-05-31T01:57:42.5347720Z env:
+2026-05-31T01:57:42.5348049Z   CARGO_TERM_COLOR: always
+2026-05-31T01:57:42.5348579Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:57:42.5349237Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:57:42.5349741Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:57:42.5350123Z   CACHE_ON_FAILURE: false
+2026-05-31T01:57:42.5350503Z ##[endgroup]
+2026-05-31T01:57:44.7446290Z [1m[92m    Updating[0m crates.io index
+2026-05-31T01:58:02.6499108Z [1m[92m   Compiling[0m ferrumward-macros v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-macros)
+2026-05-31T01:58:02.6555107Z [1m[92m   Compiling[0m ferrumward-loader v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-loader)
+2026-05-31T01:58:04.3918143Z [1m[92m    Checking[0m ferrumward-core v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-core)
+2026-05-31T01:58:05.3094739Z [1m[92m    Checking[0m ferrumward-bevy v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-bevy)
+2026-05-31T01:58:05.6413496Z [1m[92m    Checking[0m ferrumward-mock-game v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-mock-game)
+2026-05-31T01:58:06.3065018Z [1m[92m    Checking[0m ferrumward-cli v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-cli)
+2026-05-31T01:58:06.4457325Z [1m[92m    Checking[0m ferrumward-godot v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-godot)
+2026-05-31T01:58:06.7749458Z [1m[92m    Checking[0m ferrumward-ffi v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-ffi)
+2026-05-31T01:58:07.3452173Z [1m[92m    Checking[0m ferrumward-attacker v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-attacker)
+2026-05-31T01:58:07.4945687Z [1m[92m    Checking[0m dummy-game v0.1.0 (D:\a\FerrumWard\FerrumWard\dummy_game)
+2026-05-31T01:58:07.7530293Z [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 23.08s
+2026-05-31T01:58:07.9232602Z ##[group]Run cargo test --all
+2026-05-31T01:58:07.9233013Z [36;1mcargo test --all[0m
+2026-05-31T01:58:07.9298447Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-05-31T01:58:07.9298846Z env:
+2026-05-31T01:58:07.9299056Z   CARGO_TERM_COLOR: always
+2026-05-31T01:58:07.9299365Z   LITCRYPT_ENCRYPT_KEY: ferrumward-static-key-2025
+2026-05-31T01:58:07.9299749Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+2026-05-31T01:58:07.9300054Z   CARGO_INCREMENTAL: 0
+2026-05-31T01:58:07.9300299Z   CACHE_ON_FAILURE: false
+2026-05-31T01:58:07.9300558Z ##[endgroup]
+2026-05-31T01:58:08.7188480Z [1m[92m   Compiling[0m ferrumward-macros v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-macros)
+2026-05-31T01:58:08.7359116Z [1m[92m   Compiling[0m ferrumward-loader v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-loader)
+2026-05-31T01:58:09.2659768Z [1m[92m   Compiling[0m ferrumward-core v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-core)
+2026-05-31T01:58:10.9146856Z [1m[92m   Compiling[0m ferrumward-bevy v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-bevy)
+2026-05-31T01:58:11.3798301Z [1m[92m   Compiling[0m ferrumward-attacker v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-attacker)
+2026-05-31T01:58:11.9628373Z [1m[92m   Compiling[0m dummy-game v0.1.0 (D:\a\FerrumWard\FerrumWard\dummy_game)
+2026-05-31T01:58:12.3528035Z [1m[92m   Compiling[0m ferrumward-ffi v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-ffi)
+2026-05-31T01:58:13.8869666Z [1m[92m   Compiling[0m ferrumward-cli v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-cli)
+2026-05-31T01:58:16.2674627Z [1m[92m   Compiling[0m ferrumward-mock-game v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-mock-game)
+2026-05-31T01:58:16.6022621Z [1m[92m   Compiling[0m ferrumward-godot v0.1.0 (D:\a\FerrumWard\FerrumWard\ferrumward-godot)
+2026-05-31T01:58:21.8346021Z [1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 13.57s
+2026-05-31T01:58:21.8640452Z [1m[92m     Running[0m unittests src\main.rs (target\debug\deps\dummy_game-1b9658bacf5bb555.exe)
+2026-05-31T01:58:21.8760822Z 
+2026-05-31T01:58:21.8761256Z running 0 tests
+2026-05-31T01:58:21.8761789Z 
+2026-05-31T01:58:21.8762494Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-05-31T01:58:21.8763402Z 
+2026-05-31T01:58:21.8780929Z [1m[92m     Running[0m unittests src\main.rs (target\debug\deps\ferrumward_attacker-f3400c775395b98d.exe)
+2026-05-31T01:58:21.8881828Z 
+2026-05-31T01:58:21.8883534Z running 0 tests
+2026-05-31T01:58:21.8884721Z 
+2026-05-31T01:58:21.8885555Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-05-31T01:58:21.8887583Z 
+2026-05-31T01:58:21.8901546Z [1m[92m     Running[0m unittests src\lib.rs (target\debug\deps\ferrumward_bevy-735c5b500534e682.exe)
+2026-05-31T01:58:21.9003833Z 
+2026-05-31T01:58:21.9004206Z running 0 tests
+2026-05-31T01:58:21.9004685Z 
+2026-05-31T01:58:21.9007405Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-05-31T01:58:21.9016299Z 
+2026-05-31T01:58:21.9027365Z [1m[92m     Running[0m unittests src\main.rs (target\debug\deps\ferrumward-268a9519a0e7da32.exe)
+2026-05-31T01:58:21.9134791Z 
+2026-05-31T01:58:21.9135197Z running 0 tests
+2026-05-31T01:58:21.9135744Z 
+2026-05-31T01:58:21.9136470Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-05-31T01:58:21.9137381Z 
+2026-05-31T01:58:21.9153620Z [1m[92m     Running[0m tests\cli_tests.rs (target\debug\deps\cli_tests-05afb1dc58084abb.exe)
+2026-05-31T01:58:21.9252233Z 
+2026-05-31T01:58:21.9252567Z running 2 tests
+2026-05-31T01:58:21.9522310Z ✅ Manifest generated successfully at C:\Users\RUNNER~1\AppData\Local\Temp\ferrumward_cli_test_manifest_1780192701925426800\manifest.json
+2026-05-31T01:58:21.9524571Z Hashes computed: 1
+2026-05-31T01:58:21.9549914Z ✅ Keypair generated successfully!
+2026-05-31T01:58:21.9554798Z Private Key: C:\Users\RUNNER~1\AppData\Local\Temp\ferrumward_cli_test_keygen_1780192701925413100\test_private.key
+2026-05-31T01:58:21.9556774Z Public Key: C:\Users\RUNNER~1\AppData\Local\Temp\ferrumward_cli_test_keygen_1780192701925413100\test_public.key
+2026-05-31T01:58:21.9725656Z ✅ Manifest is CLEAN.
+2026-05-31T01:58:21.9762646Z ✅ License generated successfully at C:\Users\RUNNER~1\AppData\Local\Temp\ferrumward_cli_test_keygen_1780192701925413100\test_license.sig
+2026-05-31T01:58:21.9764778Z test test_cli_manifest ... ok
+2026-05-31T01:58:22.0013401Z IS OBFUSCATION ON? true
+2026-05-31T01:58:22.3102844Z MACRO GPU: "unknown"
+2026-05-31T01:58:22.3144770Z HASHING: "5b28c3f7-6c1c-44a6-b896-8b7215ae9eef" -> 417b6567eaeb05902b2467b6306aa6a1
+2026-05-31T01:58:22.3147228Z HASHING: "AMD EPYC 7763 64-Core Processor                " -> 635bf2c14bcb284872e9c11ac80c78ec
+2026-05-31T01:58:22.3148112Z Error: tampering detected
+2026-05-31T01:58:22.3148940Z HASHING: "8GB" -> b54fb117bb85eb011a2da743bafbee5d
+2026-05-31T01:58:22.3149970Z HASHING: "unknown" -> b23a6a8439c0dde5515893e7c90c1e32
+2026-05-31T01:58:22.3151185Z HASHING: "unknown" -> b23a6a8439c0dde5515893e7c90c1e32
+2026-05-31T01:58:22.3152092Z HASHING: "unknown" -> b23a6a8439c0dde5515893e7c90c1e32
+2026-05-31T01:58:22.3154257Z HASHING: "unknown" -> b23a6a8439c0dde5515893e7c90c1e32
+2026-05-31T01:58:22.3201059Z test test_cli_keygen_and_license ... ok
+2026-05-31T01:58:22.3201723Z 
+2026-05-31T01:58:22.3202425Z test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+2026-05-31T01:58:22.3203430Z 
+2026-05-31T01:58:22.3226897Z [1m[92m     Running[0m unittests src\lib.rs (target\debug\deps\ferrumward_core-afb94b60ce0d17f1.exe)
+2026-05-31T01:58:22.3341916Z 
+2026-05-31T01:58:22.3342447Z running 0 tests
+2026-05-31T01:58:22.3343173Z 
+2026-05-31T01:58:22.3343937Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-05-31T01:58:22.3344937Z 
+2026-05-31T01:58:22.3362873Z [1m[92m     Running[0m tests\brutal_tests.rs (target\debug\deps\brutal_tests-e216d25ef18f0303.exe)
+2026-05-31T01:58:22.3553483Z 
+2026-05-31T01:58:22.3554115Z running 4 tests
+2026-05-31T01:58:22.3560115Z test test_honey_pot ... ok
+2026-05-31T01:58:22.4104031Z test test_key_forgery ... ok
+2026-05-31T01:58:23.0119907Z [1m[91merror[0m: test failed, to rerun pass `-p ferrumward-core --test brutal_tests`
+2026-05-31T01:58:23.0120414Z 
+2026-05-31T01:58:23.0120508Z Caused by:
+2026-05-31T01:58:23.0121774Z   process didn't exit successfully: `D:\a\FerrumWard\FerrumWard\target\debug\deps\brutal_tests-e216d25ef18f0303.exe` (exit code: 0xc0000005, STATUS_ACCESS_VIOLATION)
+2026-05-31T01:58:23.0140422Z [1m[92mnote[0m: test exited abnormally; to see the full output pass --no-capture to the harness.
+2026-05-31T01:58:23.1260496Z ##[error]Process completed with exit code 1.
+2026-05-31T01:58:23.1511120Z Post job cleanup.
+2026-05-31T01:58:23.4802688Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-05-31T01:58:23.5315116Z git version 2.54.0.windows.1
+2026-05-31T01:58:23.5491977Z Temporarily overriding HOME='D:\a\_temp\e210be0c-24ed-4e7e-8721-dd5e39975a71' before making global git config changes
+2026-05-31T01:58:23.5493231Z Adding repository directory to the temporary git global config as a safe directory
+2026-05-31T01:58:23.5519758Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\FerrumWard\FerrumWard
+2026-05-31T01:58:24.3767947Z Removing SSH command configuration
+2026-05-31T01:58:24.3768896Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-05-31T01:58:24.3771633Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-05-31T01:58:24.3773802Z Removing HTTP extra header
+2026-05-31T01:58:24.3774750Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-05-31T01:58:24.3777851Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-05-31T01:58:24.9519737Z Removing includeIf entries pointing to credentials config files
+2026-05-31T01:58:24.9535156Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-05-31T01:58:24.9836287Z includeif.gitdir:D:/a/FerrumWard/FerrumWard/.git.path
+2026-05-31T01:58:24.9837575Z includeif.gitdir:D:/a/FerrumWard/FerrumWard/.git/worktrees/*.path
+2026-05-31T01:58:24.9838652Z includeif.gitdir:/github/workspace/.git.path
+2026-05-31T01:58:24.9840217Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-05-31T01:58:24.9886081Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/FerrumWard/FerrumWard/.git.path
+2026-05-31T01:58:25.0169969Z D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8465913Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/FerrumWard/FerrumWard/.git.path D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8470375Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/FerrumWard/FerrumWard/.git/worktrees/*.path
+2026-05-31T01:58:25.8472249Z D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8475271Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/FerrumWard/FerrumWard/.git/worktrees/*.path D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8478863Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-05-31T01:58:25.8480683Z /github/runner_temp/git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8483853Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8487219Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-05-31T01:58:25.8489087Z /github/runner_temp/git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8492203Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config
+2026-05-31T01:58:25.8498773Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-05-31T01:58:25.8501749Z Removing credentials config 'D:\a\_temp\git-credentials-16178fcb-c1b8-4856-a4ce-755bf7d470ff.config'
+2026-05-31T01:58:25.8604276Z Cleaning up orphan processes
+2026-05-31T01:58:25.8833842Z Terminate orphan process: pid (2264) (vctip)

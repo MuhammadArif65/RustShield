@@ -1,6 +1,6 @@
-# 🛡️ RustShield: The Ultimate Game Developer Guide
+# 🛡️ FerrumWard: The Ultimate Game Developer Guide
 
-Welcome to **RustShield**! This guide is designed specifically for you (the Game Developer) to secure your game against piracy and cheating without the headache.
+Welcome to **FerrumWard**! This guide is designed specifically for you (the Game Developer) to secure your game against piracy and cheating without the headache.
 
 This guide is structured step-by-step, covering initial setup, game engine integration (Godot, Bevy, Unity, Unreal), all the way to distributing your game to your players.
 
@@ -13,7 +13,7 @@ This guide is structured step-by-step, covering initial setup, game engine integ
 ---
 
 ## 📑 Table of Contents
-1. [What is RustShield?](#1-what-is-rustshield)
+1. [What is FerrumWard?](#1-what-is-ferrumward)
 2. [Step 1: Initial Setup (Compilation)](#2-step-1-initial-setup-compilation)
 3. [Step 2: Game Engine Integration](#3-step-2-game-engine-integration)
 4. [Step 3: Game Distribution Process (Crucial)](#4-step-3-game-distribution-process)
@@ -22,8 +22,8 @@ This guide is structured step-by-step, covering initial setup, game engine integ
 
 ---
 
-## 1. What is RustShield?
-RustShield is an **Offline DRM (Digital Rights Management) and Anti-Cheat system** embedded directly into your game's code. RustShield operates without requiring a continuous internet connection and **without kernel driver access** (Ring 0), making it extremely secure and friendly for Linux, Windows, and macOS operating systems.
+## 1. What is FerrumWard?
+FerrumWard is an **Offline DRM (Digital Rights Management) and Anti-Cheat system** embedded directly into your game's code. FerrumWard operates without requiring a continuous internet connection and **without kernel driver access** (Ring 0), making it extremely secure and friendly for Linux, Windows, and macOS operating systems.
 
 **Key Features:**
 - Detects cheat applications (Cheat Engine, debuggers).
@@ -34,15 +34,15 @@ RustShield is an **Offline DRM (Digital Rights Management) and Anti-Cheat system
 
 ## 2. Step 1: Initial Setup (Compilation)
 
-Before integrating RustShield into your game, you must set up your "Secret Key" and compile the RustShield development tools.
+Before integrating FerrumWard into your game, you must set up your "Secret Key" and compile the FerrumWard development tools.
 
 **Prerequisite:** Your computer must have **Rust (version 1.75+)** installed.
 
-1. Open your terminal (CMD/PowerShell/Bash) in the RustShield project folder.
+1. Open your terminal (CMD/PowerShell/Bash) in the FerrumWard project folder.
 2. Set your secret encryption key. This is used to encrypt sensitive text inside the program so hackers cannot read it.
    - **Windows (PowerShell):** `$env:LITCRYPT_ENCRYPT_KEY="YOUR_SECRET_KEY_HERE"`
    - **Linux / macOS:** `export LITCRYPT_ENCRYPT_KEY="YOUR_SECRET_KEY_HERE"`
-3. Compile all RustShield tools with the following command:
+3. Compile all FerrumWard tools with the following command:
    ```bash
    cargo build --release --all --features full
    ```
@@ -52,15 +52,15 @@ Before integrating RustShield into your game, you must set up your "Secret Key" 
 
 ## 3. Step 2: Game Engine Integration
 
-Now you will embed RustShield into your game. RustShield provides an easy approach for various engines.
+Now you will embed FerrumWard into your game. FerrumWard provides an easy approach for various engines.
 
 ### 🎮 For Bevy Engine (Rust)
-Add `rustshield-bevy` to your game's `Cargo.toml`, then add the plugin during initialization:
+Add `ferrumward-bevy` to your game's `Cargo.toml`, then add the plugin during initialization:
 
 ```rust
 use bevy::prelude::*;
-use rustshield_bevy::RustShieldPlugin;
-use rustshield_core::protection::ProtectionConfig;
+use ferrumward_bevy::FerrumWardPlugin;
+use ferrumward_core::protection::ProtectionConfig;
 
 fn main() {
     let config = ProtectionConfig {
@@ -78,24 +78,24 @@ fn main() {
 
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugins(RustShieldPlugin::new(config)) // <--- RustShield added here
+        .add_plugins(FerrumWardPlugin::new(config)) // <--- FerrumWard added here
         .run();
 }
 ```
 
 ### 🎮 For Unity (C#) or Unreal Engine (C++)
-Use the **`rustshield-ffi`** module. You will get a `.dll` (Windows), `.so` (Linux), or `.dylib` (macOS) file. Place this file into your Unity/Unreal plugin folder, then call the initialization function (specific engine documentation can be found in the main `README.md`).
+Use the **`ferrumward-ffi`** module. You will get a `.dll` (Windows), `.so` (Linux), or `.dylib` (macOS) file. Place this file into your Unity/Unreal plugin folder, then call the initialization function (specific engine documentation can be found in the main `README.md`).
 
 ---
 
 ## 4. Step 3: Game Distribution Process
 
-This section explains **how you sell your game** using the RustShield License system. This license system ensures that players who buy the game **cannot share (copy-paste)** the game to their friends for free.
+This section explains **how you sell your game** using the FerrumWard License system. This license system ensures that players who buy the game **cannot share (copy-paste)** the game to their friends for free.
 
 ### Phase 1: Generate Developer Keys (Do this once)
-As the game developer, run the RustShield CLI (Command Line Interface) tool to generate a cryptographic keypair:
+As the game developer, run the FerrumWard CLI (Command Line Interface) tool to generate a cryptographic keypair:
 ```bash
-cargo run --bin rustshield-cli -- keygen --output-dir ./keys
+cargo run --bin ferrumward-cli -- keygen --output-dir ./keys
 ```
 This generates 2 files:
 - 🔴 **`private.key`**: **SECRET!** Keep this on your local computer or secure server. Never include this in the game folder. This is used to *create* licenses.
@@ -104,7 +104,7 @@ This generates 2 files:
 ### Phase 2: Lock Game Assets (Creating a Manifest)
 If you have 3D models, sounds, or assets (e.g., in the `./assets` folder), you must "seal" them so players cannot mod or steal your assets:
 ```bash
-cargo run --bin rustshield-cli -- manifest --target-dir ./assets --output manifest.json
+cargo run --bin ferrumward-cli -- manifest --target-dir ./assets --output manifest.json
 ```
 Include this `manifest.json` file in your game's release distribution.
 
@@ -122,7 +122,7 @@ What happens when a player (John) buys your game?
 3. John sends that HWID to your website (or via email).
 4. You (the Developer) **generate a specific license** for John's PC using your secret private key:
    ```bash
-   cargo run --bin rustshield-cli -- license --hwid "MAC-B4D3-A09X" --private-key ./keys/private.key --game-id "Your_Game_Name" --output player_license.sig
+   cargo run --bin ferrumward-cli -- license --hwid "MAC-B4D3-A09X" --private-key ./keys/private.key --game-id "Your_Game_Name" --output player_license.sig
    ```
 5. You send the `player_license.sig` file to John.
 6. John places the `player_license.sig` file next to your game executable.
@@ -135,7 +135,7 @@ If John copies his game folder + license to his friend's PC (Alex), the game wil
 
 ## 6. Test Evidence & Verified Security
 
-RustShield is designed with high-quality standards and has **passed Continuous Integration (CI/CD) validation tests** across all major operating systems.
+FerrumWard is designed with high-quality standards and has **passed Continuous Integration (CI/CD) validation tests** across all major operating systems.
 
 Below is the automated testing evidence performed by GitHub runners, guaranteeing stability:
 
@@ -149,6 +149,6 @@ Below is the automated testing evidence performed by GitHub runners, guaranteein
 - Passed `cargo clippy --all-targets -D warnings` (no memory leaks, no unsafe code in user-space).
 - Latest `actions/checkout@v6` runs smoothly on GitHub Actions' new standard Node.js 24 runners, proving a modern pipeline architecture.
 
-RustShield doesn't just scare away cheaters; it keeps your game lightweight (zero-overhead) and runs 100% stable for legitimate players.
+FerrumWard doesn't just scare away cheaters; it keeps your game lightweight (zero-overhead) and runs 100% stable for legitimate players.
 
 Happy releasing, with peace of mind! 🛡️🎮
