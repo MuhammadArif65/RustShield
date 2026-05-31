@@ -113,7 +113,9 @@ mod linux_impl {
                     let payload = vec![0x90; 1024]; // 1KB NOP sled
                     match f.write_all(&payload) {
                         Ok(_) => println!("[+] Injection successful!"),
-                        Err(e) => eprintln!("[-] Injection failed (usually mapped read-only): {}", e),
+                        Err(e) => {
+                            eprintln!("[-] Injection failed (usually mapped read-only): {}", e)
+                        }
                     }
                 }
             }
@@ -153,4 +155,3 @@ fn main() {
     #[cfg(not(target_os = "linux"))]
     stub::run();
 }
-
