@@ -12,7 +12,6 @@ pub struct HwidProfile {
     pub ram: String,
     pub gpu: String,
     pub bios: String,
-    pub mac: String,
     pub disk: String,
 }
 
@@ -35,7 +34,6 @@ impl HwidProfile {
             ram: Self::hash_value(&self.ram),
             gpu: Self::hash_value(&self.gpu),
             bios: Self::hash_value(&self.bios),
-            mac: Self::hash_value(&self.mac),
             disk: Self::hash_value(&self.disk),
         }
     }
@@ -56,9 +54,6 @@ impl HwidProfile {
             score += 1;
         }
         if self.bios == other.bios {
-            score += 1;
-        }
-        if self.mac == other.mac {
             score += 1;
         }
         if self.disk == other.disk {
@@ -99,10 +94,7 @@ pub fn get_hwid_profile() -> Result<HwidProfile> {
     // 4. BIOS UUID
     let bios = get_bios_uuid().unwrap_or_else(|| crate::rs_str!("unknown_bios"));
 
-    // 5. MAC Address
-    let mac = get_mac_address().unwrap_or_else(|| crate::rs_str!("unknown_mac"));
-
-    // 6. Disk Serial
+    // 5. Disk Serial
     let disk = get_disk_serial().unwrap_or_else(|| crate::rs_str!("unknown_disk"));
 
     Ok(HwidProfile {
@@ -111,7 +103,6 @@ pub fn get_hwid_profile() -> Result<HwidProfile> {
         ram,
         gpu,
         bios,
-        mac,
         disk,
     })
 }
@@ -161,22 +152,6 @@ fn get_bios_uuid() -> Option<String> {
         ])
         .output()
         .ok()?;
-    if !output.status.success() {
-        return None;
-    }
-    let out_str = String::from_utf8_lossy(&output.stdout);
-    let trimmed = out_str.trim();
-    if trimmed.is_empty() {
-        return None;
-    }
-    Some(trimmed.to_string())
-}
-
-#[cfg(target_os = "windows")]
-fn get_mac_address() -> Option<String> {
-    let output = Command::new(crate::rs_str!("powershell"))
-        .args([crate::rs_str!("-NoProfile"), crate::rs_str!("-Command"), crate::rs_str!("Get-CimInstance Win32_NetworkAdapterConfiguration | Where-Object { $_.IPEnabled -eq $true } | Select-Object -ExpandProperty MACAddress | Select-Object -First 1")])
-        .output().ok()?;
     if !output.status.success() {
         return None;
     }
@@ -239,19 +214,6 @@ fn get_bios_uuid() -> Option<String> {
 }
 
 #[cfg(target_os = "macos")]
-fn get_mac_address() -> Option<String> {
-    let output = Command::new(crate::rs_str!("ifconfig"))
-        .arg(crate::rs_str!("-a"))
-        .output()
-        .ok()?;
-    let out_str = String::from_utf8_lossy(&output.stdout);
-    out_str
-        .lines()
-        .find(|l| l.contains(&crate::rs_str!("ether")))
-        .map(|s| s.replace(&crate::rs_str!("ether"), "").trim().to_string())
-}
-
-#[cfg(target_os = "macos")]
 fn get_disk_serial() -> Option<String> {
     let output = Command::new(crate::rs_str!("system_profiler"))
         .args([crate::rs_str!("SPStorageDataType")])
@@ -305,28 +267,6 @@ fn get_bios_uuid() -> Option<String> {
         let trimmed = machine_id.trim();
         if !trimmed.is_empty() {
             return Some(trimmed.to_string());
-        }
-    }
-    None
-}
-
-#[cfg(not(any(target_os = "windows", target_os = "macos")))]
-fn get_mac_address() -> Option<String> {
-    let dirs = std::fs::read_dir(crate::rs_str!("/sys/class/net")).ok()?;
-    for entry in dirs.flatten() {
-        if let Ok(name) = entry.file_name().into_string() {
-            if name != crate::rs_str!("lo")
-                && !name.starts_with(crate::rs_str!("docker").as_str())
-                && !name.starts_with(crate::rs_str!("veth").as_str())
-            {
-                let mac_path = entry.path().join(crate::rs_str!("address"));
-                if let Ok(mac) = std::fs::read_to_string(mac_path) {
-                    let trimmed = mac.trim();
-                    if !trimmed.is_empty() {
-                        return Some(trimmed.to_string());
-                    }
-                }
-            }
         }
     }
     None

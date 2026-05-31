@@ -1,5 +1,9 @@
 # FerrumWard
 
+![CI Status](https://img.shields.io/github/actions/workflow/status/MuhammadArif65/FerrumWard/ci.yml?branch=main)
+![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)
+![Rust Version](https://img.shields.io/badge/rustc-1.75+-lightgray.svg)
+
 **FerrumWard** is a zero-dependency, modular, and extremely secure offline anti-piracy and game protection system written in Rust.
 
 It provides out-of-the-box mechanisms to prevent debugging, virtualization, memory tampering, and unauthorized distribution through hardware-bound cryptography. FerrumWard is designed for offline games and ships with official wrappers for **Bevy**, **Godot**, **Unity**, and **Unreal Engine**.
@@ -8,7 +12,7 @@ It provides out-of-the-box mechanisms to prevent debugging, virtualization, memo
 
 ### 📚 Documentation Hub
 - 🚀 **[User Guide for Game Developers](USER_GUIDE.md)** - Start here! Step-by-step setup, integration, and distribution guide.
-- 🧠 **[Architecture & Deep Dive](ARCHITECTURE.md)** - Learn how the Neural Heuristic Engine and Chaotic Threading work under the hood.
+- 🧠 **[Architecture & Deep Dive](ARCHITECTURE.md)** - Learn how the Weighted Heuristic Scoring Engine and Chaotic Threading work under the hood.
 - 🤝 **[Contributing](CONTRIBUTING.md)** - How to contribute to the project.
 - 🛡️ **[Security Policy](SECURITY.md)** - Reporting vulnerabilities.
 
@@ -18,7 +22,7 @@ It provides out-of-the-box mechanisms to prevent debugging, virtualization, memo
 
 - 🛑 **Anti-Debug:** Detects `gdb`, `lldb`, `x64dbg`, CheatEngine, and API hooks natively on Windows, macOS, and Linux.
 - 💻 **Anti-VM & Anti-Emulation:** Detects execution inside VirtualBox, VMware, QEMU, KVM, Wine, and Proton.
-- 🧬 **Hardware Binding (HWID):** Generates robust, deterministic hardware fingerprints (UUID, MAC address, GPU, RAM) preventing license sharing across machines.
+- 🧬 **Hardware Binding (HWID):** Generates robust, deterministic hardware fingerprints (UUID, CPU, RAM, Disk) preventing license sharing across machines.
 - 🔑 **Cryptographic Licensing:** Employs Ed25519 digital signatures for offline activation keys.
 - 🛡️ **Memory Integrity & Canary:** Uses atomic data canaries to detect memory tampering and memory scanners in real-time.
 - ⏱️ **Time Tampering Guard:** Prevents players from modifying the system clock to bypass license expirations.
@@ -55,6 +59,7 @@ Use the `ferrumward-cli` to generate your Ed25519 Keypair. This keypair is used 
 cargo run --bin ferrumward-cli -- keygen --output-dir ./keys
 ```
 This generates `private.key` (keep this safe) and `public.key` (ship this with your game).
+*Note: Both keys are stored as raw 32-byte Ed25519 binary files, not PEM/Base64.*
 
 ### 2. Generate Game Manifest
 Create a cryptographic hash manifest of your game assets to detect modified files.
@@ -92,6 +97,7 @@ fn main() {
         manifest_path: Some("manifest.json".into()),
         anti_debug: true,
         anti_vm: true,
+        allow_proton: true,
         on_failure: Some(Box::new(|err| {
             println!("Game crashed! Reason: {:?}", err);
             std::process::exit(1);

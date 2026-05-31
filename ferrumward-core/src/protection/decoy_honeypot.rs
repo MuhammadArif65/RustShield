@@ -1,4 +1,5 @@
 use crate::error::{FerrumWardError, Result};
+use rand::Rng;
 use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
 
 /// Highly attractive but completely fake variables to trap memory scanners like Cheat Engine.
@@ -6,7 +7,9 @@ use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
 /// is manipulating memory.
 pub struct DecoyHoneypot {
     player_health: AtomicI32,
+    expected_health: i32,
     player_gold: AtomicI32,
+    expected_gold: i32,
     infinite_ammo: AtomicBool,
     god_mode: AtomicBool,
     time_bomb_triggered: AtomicBool,
@@ -14,9 +17,16 @@ pub struct DecoyHoneypot {
 
 impl Default for DecoyHoneypot {
     fn default() -> Self {
+        let mut rng = rand::thread_rng();
+        // Generate random plausible values to defeat static pattern matching
+        let health = rng.gen_range(50..=200);
+        let gold = rng.gen_range(100..=9999);
+
         Self {
-            player_health: AtomicI32::new(100),
-            player_gold: AtomicI32::new(999),
+            player_health: AtomicI32::new(health),
+            expected_health: health,
+            player_gold: AtomicI32::new(gold),
+            expected_gold: gold,
             infinite_ammo: AtomicBool::new(false),
             god_mode: AtomicBool::new(false),
             time_bomb_triggered: AtomicBool::new(false),
@@ -36,10 +46,10 @@ impl DecoyHoneypot {
             // or just return TamperDetected which breaks the protection loop.
             return Err(FerrumWardError::TamperDetected);
         }
-        if self.player_health.load(Ordering::Relaxed) != 100 {
+        if self.player_health.load(Ordering::Relaxed) != self.expected_health {
             return Err(FerrumWardError::TamperDetected);
         }
-        if self.player_gold.load(Ordering::Relaxed) != 999 {
+        if self.player_gold.load(Ordering::Relaxed) != self.expected_gold {
             return Err(FerrumWardError::TamperDetected);
         }
         if self.infinite_ammo.load(Ordering::Relaxed) {
@@ -58,5 +68,3 @@ impl DecoyHoneypot {
         self.time_bomb_triggered.store(true, Ordering::SeqCst);
     }
 }
-
-//

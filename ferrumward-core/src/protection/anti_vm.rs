@@ -3,20 +3,20 @@ use crate::error::{FerrumWardError, Result};
 
 /// Checks if the process is running inside a virtual machine.
 /// Returns `true` if a VM is detected, otherwise `false`.
-pub fn is_virtual_machine() -> bool {
+pub fn is_virtual_machine(allow_proton: bool) -> bool {
     #[cfg(target_os = "linux")]
     {
-        check_linux()
+        check_linux(allow_proton)
     }
 
     #[cfg(target_os = "windows")]
     {
-        check_windows()
+        check_windows(allow_proton)
     }
 
     #[cfg(target_os = "macos")]
     {
-        check_macos()
+        check_macos(allow_proton)
     }
 
     #[cfg(not(any(target_os = "linux", target_os = "windows", target_os = "macos")))]
@@ -27,8 +27,8 @@ pub fn is_virtual_machine() -> bool {
 
 /// Asserts that the process is not running inside a virtual machine.
 /// Returns an error if a VM is found.
-pub fn assert_no_virtual_machine() -> Result<()> {
-    if is_virtual_machine() {
+pub fn assert_no_virtual_machine(allow_proton: bool) -> Result<()> {
+    if is_virtual_machine(allow_proton) {
         Err(FerrumWardError::TamperDetected)
     } else {
         Ok(())
@@ -36,16 +36,18 @@ pub fn assert_no_virtual_machine() -> Result<()> {
 }
 
 /// Checks if the given string contains a known VM identifier but not a whitelisted one.
-fn contains_vm_signature(info: &str) -> bool {
+fn contains_vm_signature(info: &str, allow_proton: bool) -> bool {
     let lower = info.to_lowercase();
 
     // Whitelist check first
-    if lower.contains(crate::rs_str!("wine").as_str())
-        || lower.contains(crate::rs_str!("proton").as_str())
-        || lower.contains(crate::rs_str!("valve").as_str())
-        || lower.contains(crate::rs_str!("steamdeck").as_str())
-    {
-        return false;
+    if allow_proton {
+        if lower.contains(crate::rs_str!("wine").as_str())
+            || lower.contains(crate::rs_str!("proton").as_str())
+            || lower.contains(crate::rs_str!("valve").as_str())
+            || lower.contains(crate::rs_str!("steamdeck").as_str())
+        {
+            return false;
+        }
     }
 
     // Blacklist check
@@ -59,7 +61,7 @@ fn contains_vm_signature(info: &str) -> bool {
 }
 
 #[cfg(target_os = "linux")]
-fn check_linux() -> bool {
+fn check_linux(allow_proton: bool) -> bool {
     use std::fs::File;
     use std::io::{BufRead, BufReader};
 
@@ -69,7 +71,7 @@ fn check_linux() -> bool {
             .lines()
             .map_while(std::result::Result::ok)
         {
-            if contains_vm_signature(&line) {
+            if contains_vm_signature(&line, allow_proton) {
                 return true;
             }
         }
@@ -77,12 +79,12 @@ fn check_linux() -> bool {
 
     // Check DMI sysfs (vendor/product name)
     if let Ok(vendor) = std::fs::read_to_string(crate::rs_str!("/sys/class/dmi/id/sys_vendor")) {
-        if contains_vm_signature(&vendor) {
+        if contains_vm_signature(&vendor, allow_proton) {
             return true;
         }
     }
     if let Ok(product) = std::fs::read_to_string(crate::rs_str!("/sys/class/dmi/id/product_name")) {
-        if contains_vm_signature(&product) {
+        if contains_vm_signature(&product, allow_proton) {
             return true;
         }
     }
@@ -91,7 +93,7 @@ fn check_linux() -> bool {
 }
 
 #[cfg(target_os = "windows")]
-fn check_windows() -> bool {
+fn check_windows(allow_proton: bool) -> bool {
     use std::process::Command;
 
     // We use command line to query the registry since we avoid adding unapproved dependencies.
@@ -105,7 +107,7 @@ fn check_windows() -> bool {
         .output()
     {
         if let Ok(text) = String::from_utf8(output.stdout) {
-            if contains_vm_signature(&text) {
+            if contains_vm_signature(&text, allow_proton) {
                 return true;
             }
         }
@@ -121,7 +123,7 @@ fn check_windows() -> bool {
         .output()
     {
         if let Ok(text) = String::from_utf8(output.stdout) {
-            if contains_vm_signature(&text) {
+            if contains_vm_signature(&text, allow_proton) {
                 return true;
             }
         }
@@ -131,7 +133,7 @@ fn check_windows() -> bool {
 }
 
 #[cfg(target_os = "macos")]
-fn check_macos() -> bool {
+fn check_macos(allow_proton: bool) -> bool {
     use std::ffi::CString;
     use std::os::raw::c_int;
     use std::ptr;
@@ -193,7 +195,7 @@ fn check_macos() -> bool {
             // Null terminated, but String::from_utf8 handles the slice. We can trim nulls later or just check contains.
             if let Ok(text) = String::from_utf8(info) {
                 let clean_text = text.trim_matches(char::from(0));
-                if contains_vm_signature(clean_text) {
+                if contains_vm_signature(clean_text, allow_proton) {
                     return true;
                 }
             }

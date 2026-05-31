@@ -30,6 +30,8 @@ pub struct ProtectionConfig {
     pub manifest_path: Option<std::path::PathBuf>,
     pub anti_debug: bool,
     pub anti_vm: bool,
+    /// Whether to allow running under Wine/Proton. Requires anti_vm to be true to have any effect.
+    pub allow_proton: bool,
     /// A generic failure callback. Do NOT reveal specific reasons here.
     pub on_failure: Option<Box<dyn Fn(FerrumWardError) + Send + Sync>>,
 }
@@ -60,7 +62,7 @@ pub fn protect(config: ProtectionConfig) -> Result<()> {
     // Layer 2: Anti-VM
     #[cfg(feature = "anti-vm")]
     if config.anti_vm {
-        if let Err(e) = assert_no_virtual_machine() {
+        if let Err(e) = assert_no_virtual_machine(config.allow_proton) {
             trigger_failure(&config, e)?;
         }
     }

@@ -28,16 +28,18 @@ fn main() {
             std::process::exit(1);
         }
     };
+    let license = std::fs::read_to_string("license.key").ok();
 
     let config = ProtectionConfig {
-        game_id: "mock-game".to_string(),
+        game_id: "com.mycompany.mygame".to_string(),
         public_key: public_key.clone(),
-        license: std::fs::read_to_string("license.key").ok(),
+        license: license,
         manifest_path: Some(std::path::PathBuf::from("manifest.json")),
         anti_debug: true,
         anti_vm: true,
-        on_failure: Some(Box::new(|_err| {
-            eprintln!("💀 [MOCK GAME] Protection triggered. Shutting down.");
+        allow_proton: true, // Required for Steam Deck compatibility
+        on_failure: Some(Box::new(|err| {
+            eprintln!(">>> [CRITICAL] Protection Failure: {:?}", err);
             std::process::exit(1);
         })),
     };

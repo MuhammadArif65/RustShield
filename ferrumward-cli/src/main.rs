@@ -68,6 +68,10 @@ enum Commands {
         /// Output path for the manifest JSON
         #[arg(short, long, default_value = "manifest.json")]
         output: PathBuf,
+
+        /// Optional path to private key to sign the manifest
+        #[arg(short = 'k', long)]
+        private_key: Option<PathBuf>,
     },
 
     /// Verify a license or a manifest
@@ -201,7 +205,7 @@ fn main() -> Result<()> {
             println!("✅ License generated successfully at {}", output);
         }
 
-        Commands::Manifest { dir, output } => {
+        Commands::Manifest { dir, output, private_key } => {
             let mut manifest = HashMap::new();
 
             for entry in walkdir::WalkDir::new(&dir)
@@ -220,11 +224,28 @@ fn main() -> Result<()> {
                 }
             }
 
+            let json_str = serde_json::to_string_pretty(&manifest)?;
             let mut out_file = File::create(&output).context("Failed to create manifest file")?;
-            serde_json::to_writer_pretty(&mut out_file, &manifest)?;
+            out_file.write_all(json_str.as_bytes())?;
 
             println!("✅ Manifest generated successfully at {}", output.display());
             println!("Hashes computed: {}", manifest.len());
+
+            if let Some(priv_path) = private_key {
+                let priv_bytes = std::fs::read(&priv_path).context("Failed to read private key")?;
+                let key_bytes: [u8; 32] = priv_bytes.as_slice().try_into().map_err(|_| {
+                    anyhow::anyhow!("Private key must be exactly 32 bytes")
+                })?;
+                let signing_key = SigningKey::from_bytes(&key_bytes);
+                use ed25519_dalek::Signer;
+                let signature = signing_key.sign(json_str.as_bytes());
+                
+                let mut sig_path = output.clone();
+                sig_path.set_extension("sig");
+                let mut sig_file = File::create(&sig_path).context("Failed to create manifest.sig")?;
+                sig_file.write_all(&signature.to_bytes())?;
+                println!("✅ Manifest signed successfully at {}", sig_path.display());
+            }
         }
 
         Commands::Verify { mode } => match mode {

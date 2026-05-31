@@ -24,8 +24,14 @@ FerrumWard was born out of the necessity for a **zero-dependency, highly secure 
 
 FerrumWard does not rely on a single point of failure. It uses a multi-layered approach:
 
-### A. The Neural Heuristic Scoring Engine
-Instead of just checking binary flags (e.g., "Is a debugger attached? Yes/No"), FerrumWard employs a **Neural Heuristic Scoring Engine**. This is a Multi-Layer Perceptron (MLP) style scoring system (5 inputs -> 4 hidden nodes -> 1 output) that evaluates system telemetry in real-time.
+### 2. Weighted Heuristic Scoring Engine
+
+Instead of relying purely on binary flags (e.g. `is_debugger_present == true`), FerrumWard utilizes a **Weighted Heuristic Scoring Engine** that evaluates multiple system signals simultaneously.
+
+### Architecture (5 -> 4 -> 1)
+- **Input Layer:** 5 sensory nodes capturing raw telemetry.
+- **Hidden Layer:** 4 normalization nodes that weight the severity of the signals.
+- **Output Layer:** 1 binary decision node (Tamper / Safe).
 
 **The Sensors (Inputs):**
 1.  **Page Fault Spikes:** Monitors `/proc/self/stat`. A massive, sudden spike in page faults usually indicates a memory scanner (like Cheat Engine) is aggressively reading the game's memory.

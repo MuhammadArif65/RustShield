@@ -9,7 +9,6 @@ members = [
     "ferrumward-mock-game",
     "ferrumward-macros",
     "ferrumward-loader",
-    "dummy_game",
     "ferrumward-attacker",
 ]
 
