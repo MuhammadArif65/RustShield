@@ -17,28 +17,31 @@ pub fn start_anti_suspend_watchdog(
     let running = Arc::new(AtomicBool::new(true));
     let running_clone = running.clone();
 
-    if let Err(e) = thread::Builder::new().name("anti_suspend".to_string()).spawn(move || {
-        let mut last_check = Instant::now();
-        let sleep_dur = Duration::from_millis(500);
+    if let Err(e) = thread::Builder::new()
+        .name("anti_suspend".to_string())
+        .spawn(move || {
+            let mut last_check = Instant::now();
+            let sleep_dur = Duration::from_millis(500);
 
-        while running_clone.load(Ordering::Relaxed) {
-            thread::sleep(sleep_dur);
+            while running_clone.load(Ordering::Relaxed) {
+                thread::sleep(sleep_dur);
 
-            let elapsed = last_check.elapsed().as_millis() as u64;
+                let elapsed = last_check.elapsed().as_millis() as u64;
 
-            // Expected elapsed is sleep_dur (~500ms).
-            // If it's significantly larger (e.g. 500ms + threshold), the thread was suspended.
-            if elapsed > (sleep_dur.as_millis() as u64 + threshold_millis) {
-                // Tamper detected!
-                if let Some(ref cb) = on_failure {
-                    cb(RustShieldError::TamperDetected);
+                // Expected elapsed is sleep_dur (~500ms).
+                // If it's significantly larger (e.g. 500ms + threshold), the thread was suspended.
+                if elapsed > (sleep_dur.as_millis() as u64 + threshold_millis) {
+                    // Tamper detected!
+                    if let Some(ref cb) = on_failure {
+                        cb(RustShieldError::TamperDetected);
+                    }
+                    break;
                 }
-                break;
-            }
 
-            last_check = Instant::now();
-        }
-    }) {
+                last_check = Instant::now();
+            }
+        })
+    {
         eprintln!("Failed to spawn anti_suspend thread: {}", e);
     }
 
