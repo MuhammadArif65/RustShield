@@ -9,6 +9,7 @@ on:
 env:
   CARGO_TERM_COLOR: always
   LITCRYPT_ENCRYPT_KEY: rustshield-static-key-2025
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   check:
