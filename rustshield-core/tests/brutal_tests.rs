@@ -16,9 +16,67 @@ fn generate_test_keys() -> (SigningKey, VerifyingKey) {
     (signing_key, verifying_key)
 }
 
-// Removed test_burst_hacking and test_time_freeze because calling protect() in a test harness
-// leaks infinite detached chaotic threads, which causes STATUS_ACCESS_VIOLATION on Windows
-// during process teardown.
+/// 1. Burst Hacking & Time Freeze Test (Subprocess Wrapper)
+/// We run these tests in a subprocess and use `std::process::exit(0)` to prevent
+/// `STATUS_ACCESS_VIOLATION` on Windows during CRT teardown caused by detached infinite threads.
+#[test]
+fn test_burst_hacking_and_sequential_protect() {
+    // If we are running inside the subprocess...
+    if std::env::var("RUSTSHIELD_BURST_TEST").is_ok() {
+        // A. Burst Hacking (Concurrent calls to protect)
+        let mut handles = vec![];
+        for _ in 0..10 {
+            let handle = thread::Builder::new().spawn(move || {
+                let config = ProtectionConfig {
+                    game_id: "test".to_string(),
+                    public_key: vec![],
+                    license: None,
+                    manifest_path: None,
+                    anti_debug: false,
+                    anti_vm: false,
+                    on_failure: None,
+                };
+                let _ = protect(config);
+            });
+            if let Ok(h) = handle {
+                handles.push(h);
+            }
+        }
+        for handle in handles {
+            let _ = handle.join();
+        }
+
+        // B. Sequential Protect (Simulating Time Freeze rapid invocations)
+        for _ in 0..10 {
+            let config = ProtectionConfig {
+                game_id: "test".to_string(),
+                public_key: vec![],
+                license: None,
+                manifest_path: None,
+                anti_debug: false,
+                anti_vm: false,
+                on_failure: None,
+            };
+            let _ = protect(config);
+        }
+
+        // Exit cleanly, bypassing Windows CRT teardown which crashes with detached threads.
+        std::process::exit(0);
+    }
+
+    // Otherwise, we are the main test runner. Spawn the subprocess!
+    let exe = std::env::current_exe().expect("Failed to get current executable");
+    let status = std::process::Command::new(exe)
+        // Pass the env var so the subprocess knows to run the test logic and exit
+        .env("RUSTSHIELD_BURST_TEST", "1")
+        // We only want to run THIS specific test in the subprocess
+        .arg("test_burst_hacking_and_sequential_protect")
+        .arg("--exact")
+        .status()
+        .expect("Failed to spawn subprocess for burst test");
+
+    assert!(status.success(), "Subprocess burst test failed or crashed");
+}
 
 /// 2. Memory Injection Simulation
 #[test]
