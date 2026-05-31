@@ -1,5 +1,5 @@
 #![allow(dead_code, unused_variables, unused_imports)]
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 
 /// Checks if a debugger is currently attached to the process.
 /// Returns `true` if a debugger is detected, otherwise `false`.

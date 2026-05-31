@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 use crate::fingerprint::{get_hwid_profile, HwidProfile};
 use crate::license::LicenseData;
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD, Engine as _};

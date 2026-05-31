@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 
 /// Checks for suspicious injected libraries (DLLs/SOs).
 pub fn assert_no_injected_modules() -> Result<()> {

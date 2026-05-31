@@ -1,7 +1,7 @@
 #![allow(warnings)]
 use ferrumward_core::error::FerrumWardError;
-use ferrumward_core::protection::{protect, ProtectionConfig};
 use ferrumward_core::ferrumward_checkpoint;
+use ferrumward_core::protection::{protect, ProtectionConfig};
 use std::ffi::CStr;
 use std::panic::{catch_unwind, AssertUnwindSafe};
 

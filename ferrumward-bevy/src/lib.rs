@@ -1,7 +1,7 @@
 #![allow(warnings)]
 use bevy::prelude::*;
-use ferrumward_core::protection::{protect, ProtectionConfig};
 use ferrumward_core::ferrumward_checkpoint;
+use ferrumward_core::protection::{protect, ProtectionConfig};
 use std::sync::{Arc, Mutex};
 
 /// A Bevy Plugin that integrates FerrumWard anti-piracy protections.

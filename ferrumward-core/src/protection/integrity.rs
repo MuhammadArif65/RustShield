@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 #[cfg(feature = "hardware-binding")]
 use crate::fingerprint::get_hardware_id;
 #[cfg(feature = "anti-debug")]

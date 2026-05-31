@@ -1,5 +1,5 @@
 #![allow(dead_code, unused_variables, unused_imports)]
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 
 /// Checks if the process is running inside a virtual machine.
 /// Returns `true` if a VM is detected, otherwise `false`.

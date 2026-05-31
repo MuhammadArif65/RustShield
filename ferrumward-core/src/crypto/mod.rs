@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 use aes_gcm::{
     aead::{Aead, AeadCore, KeyInit, OsRng},
     Aes256Gcm, Key, Nonce,

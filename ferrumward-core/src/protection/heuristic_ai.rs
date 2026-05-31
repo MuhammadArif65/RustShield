@@ -1,6 +1,6 @@
 #![allow(clippy::new_without_default)]
 #![allow(dead_code, unused_variables, unused_imports)]
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 use core::arch::x86_64::_rdtsc;
 use std::sync::{Mutex, OnceLock};

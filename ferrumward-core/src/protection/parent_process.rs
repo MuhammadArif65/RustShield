@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 use sysinfo::System;
 
 /// Asserts that the game was launched by a legitimate process and not a debugger.

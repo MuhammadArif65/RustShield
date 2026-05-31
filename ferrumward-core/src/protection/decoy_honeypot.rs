@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
 
 /// Highly attractive but completely fake variables to trap memory scanners like Cheat Engine.

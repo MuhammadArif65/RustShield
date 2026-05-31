@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 
 #[cfg(feature = "crypto")]
 use aes_gcm::{

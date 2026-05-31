@@ -1,5 +1,5 @@
 #![allow(unused_imports)]
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 
 /// Checks if hardware breakpoints (DR0-DR3) are active on the current thread.
 pub fn assert_no_hardware_breakpoints() -> Result<()> {

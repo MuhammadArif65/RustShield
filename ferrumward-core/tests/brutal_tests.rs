@@ -1,12 +1,12 @@
 #![allow(warnings)]
 use ed25519_dalek::{SigningKey, VerifyingKey};
-use rand::rngs::OsRng;
 use ferrumward_core::{
     error::FerrumWardError,
     license::validator::validate_license_secure,
     protection::decoy_honeypot::DecoyHoneypot,
     protection::{protect, scan_for_rwx_memory, ProtectionConfig},
 };
+use rand::rngs::OsRng;
 use std::thread;
 
 fn generate_test_keys() -> (SigningKey, VerifyingKey) {

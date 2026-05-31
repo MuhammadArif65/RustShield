@@ -1,5 +1,5 @@
 #![allow(dead_code, unused_variables, unused_imports)]
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 
 #[cfg(target_os = "linux")]
 pub fn scan_for_rwx_memory() -> Result<()> {

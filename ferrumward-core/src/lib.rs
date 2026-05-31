@@ -29,6 +29,6 @@ pub mod fingerprint;
 pub mod license;
 pub mod protection;
 
-pub use error::{Result, FerrumWardError};
+pub use error::{FerrumWardError, Result};
 
 //

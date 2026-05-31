@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 use std::sync::Mutex;
 
 /// Tracks kinematic inputs (like mouse click intervals) to detect macros and auto-clickers.

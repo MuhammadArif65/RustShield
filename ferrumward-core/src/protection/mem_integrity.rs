@@ -1,4 +1,4 @@
-use crate::error::{Result, FerrumWardError};
+use crate::error::{FerrumWardError, Result};
 use sha2::{Digest, Sha256};
 use std::sync::OnceLock;
 

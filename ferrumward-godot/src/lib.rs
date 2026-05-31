@@ -1,9 +1,9 @@
 #![allow(clippy::result_large_err)]
 #![allow(clippy::all)]
-use godot::prelude::*;
 use ferrumward_core::error::FerrumWardError;
-use ferrumward_core::protection::{protect, ProtectionConfig};
 use ferrumward_core::ferrumward_checkpoint;
+use ferrumward_core::protection::{protect, ProtectionConfig};
+use godot::prelude::*;
 
 struct FerrumWardGodot;
 
