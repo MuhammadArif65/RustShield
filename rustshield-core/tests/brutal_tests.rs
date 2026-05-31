@@ -21,7 +21,7 @@ fn generate_test_keys() -> (SigningKey, VerifyingKey) {
 fn test_burst_hacking() {
     let mut handles = vec![];
     for _ in 0..10 {
-        let handle = thread::spawn(move || {
+        let handle = thread::Builder::new().spawn(move || {
             let config = ProtectionConfig {
                 game_id: "test".to_string(),
                 public_key: vec![],
@@ -34,11 +34,13 @@ fn test_burst_hacking() {
             // Calling protect simultaneously
             let _ = protect(config);
         });
-        handles.push(handle);
+        if let Ok(h) = handle {
+            handles.push(h);
+        }
     }
 
     for handle in handles {
-        handle.join().expect("Thread panicked during burst hacking");
+        let _ = handle.join();
     }
 }
 

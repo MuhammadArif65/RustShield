@@ -17,7 +17,7 @@ pub fn start_anti_suspend_watchdog(
     let running = Arc::new(AtomicBool::new(true));
     let running_clone = running.clone();
 
-    thread::spawn(move || {
+    if let Err(e) = thread::Builder::new().name("anti_suspend".to_string()).spawn(move || {
         let mut last_check = Instant::now();
         let sleep_dur = Duration::from_millis(500);
 
@@ -38,7 +38,9 @@ pub fn start_anti_suspend_watchdog(
 
             last_check = Instant::now();
         }
-    });
+    }) {
+        eprintln!("Failed to spawn anti_suspend thread: {}", e);
+    }
 
     running
 }
